@@ -13,7 +13,7 @@ const sansFontStack = [
   'Segoe UI Symbol',
 ];
 
-module.exports = {
+export default {
   content: ['./src/**/*.{html,njk,md,yaml,js,svg}'],
   theme: {
     extend: {

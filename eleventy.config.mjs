@@ -1,18 +1,10 @@
-const markdownIt = require('markdown-it');
-const bundlerPlugin = require('@11ty/eleventy-plugin-bundle');
-const prettier = require('./src/transforms/prettier.js');
-const yaml = require('js-yaml');
+import markdownIt from 'markdown-it';
+import bundlerPlugin from '@11ty/eleventy-plugin-bundle';
+import prettier from './src/transforms/prettier.js';
+import yaml from 'js-yaml';
 let formatTitle;
 
-import('@directus/format-title')
-  .then((module) => {
-    formatTitle = module.default;
-  })
-  .catch((err) => {
-    console.error('Failed to load module', err);
-  });
-
-module.exports = function (eleventyConfig) {
+export default function (eleventyConfig) {
   const mdOptions = {
     html: true,
     breaks: true,
@@ -176,4 +168,4 @@ module.exports = function (eleventyConfig) {
     htmlTemplateEngine: 'njk',
     dataTemplateEngine: 'njk',
   };
-};
+}

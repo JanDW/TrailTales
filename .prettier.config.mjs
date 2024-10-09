@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   plugins: ['prettier-plugin-tailwindcss', 'prettier-plugin-jinja-template'],
   tabWidth: 2,
   useTabs: false,
