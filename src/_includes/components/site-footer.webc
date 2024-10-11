@@ -1,3 +1,14 @@
 <footer>
   <p>© Jan De Wilde · 2024</p>
 </footer>
+
+<style webc:scoped>
+  :host {
+    color: red !important;
+    font-weight: bold;
+  }
+</style>
+
+<script>
+  console.log('site-footer.webc says hello');
+</script>

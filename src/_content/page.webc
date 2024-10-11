@@ -1,0 +1,7 @@
+---
+layout: layout.webc
+permalink: /index.html
+---
+
+hello *world*
+<site-footer></site-footer>
