@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document Title is something</title>
     <style @raw="getBundle('css')" webc:keep></style>
-    <script @raw="getBundle('js')" webc:keep defer></script>
   </head>
-  <body @html="this.content"></body>
+  <body>
+    <main @html="this.content"></main>
+    <script @raw="getBundle('js')" webc:keep></script>
+  </body>
 </html>
