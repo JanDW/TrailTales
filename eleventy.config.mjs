@@ -1,5 +1,6 @@
 import markdownIt from 'markdown-it';
 import bundlerPlugin from '@11ty/eleventy-plugin-bundle';
+import webCPlugin from '@11ty/eleventy-plugin-webc';
 import prettier from './src/transforms/prettier.js';
 import yaml from 'js-yaml';
 let formatTitle;
@@ -78,7 +79,11 @@ export default function (eleventyConfig) {
   };
 
   // Plugins
+
   eleventyConfig.addPlugin(bundlerPlugin);
+  eleventyConfig.addPlugin(webCPlugin, {
+    components: 'src/_includes/components/**/*.webc',
+  });
 
   eleventyConfig.addFilter('toHeading', function (value) {
     // Split the string on camelCase boundaries, then capitalize the first letter of each word
@@ -163,9 +168,9 @@ export default function (eleventyConfig) {
       input: 'src',
       output: 'www',
     },
-    templateFormats: ['md', 'html', 'njk'],
-    markdownTemplateEngine: 'njk',
-    htmlTemplateEngine: 'njk',
-    dataTemplateEngine: 'njk',
+    templateFormats: ['md', 'html', 'webc'],
+    markdownTemplateEngine: 'webc',
+    htmlTemplateEngine: 'webc',
+    dataTemplateEngine: 'webc',
   };
 }
