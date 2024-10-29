@@ -35,9 +35,14 @@
 
       let map = L.map(uid).setView([initialLat, initialLng], zoomLevel);
 
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-      }).addTo(map);
+      L.tileLayer(
+        'https://api.maptiler.com/maps/outdoor-v2/{z}/{x}/{y}.png?key=UoQ5TMGbt6J7x0RXurZ4',
+        {
+          attribution:
+            '&copy; <a href="https://www.maptiler.com/copyright/">MapTiler</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>',
+          maxZoom: 19,
+        }
+      ).addTo(map);
 
       L.control.scale().addTo(map);
 
