@@ -1,7 +1,11 @@
 ---
 layout: layout.webc
 permalink: /walks/index.html
-gpx_file: Thursday Afternoon Run.gpx
+gpx_files:
+  - hike-with-senne.gpx
+  - Thursday Afternoon Run.gpx
+  - Monday Afternoon Walk.gpx
+  - Recovered.gpx
 ---
 
 <style>
@@ -12,4 +16,4 @@ gpx_file: Thursday Afternoon Run.gpx
 
 <h1>Walks</h1>
 
-<gpx-map :file="gpx_file"></gpx-map>
+<gpx-map webc:for="gpx_file of gpx_files" :file="gpx_file"></gpx-map>
