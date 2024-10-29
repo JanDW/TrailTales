@@ -1,0 +1,15 @@
+---
+layout: layout.webc
+permalink: /walks/index.html
+gpx_file: Thursday Afternoon Run.gpx
+---
+
+<style>
+  * + * {
+    margin-block-start: 2em;
+  }
+</style>
+
+<h1>Walks</h1>
+
+<gpx-map :file="gpx_file"></gpx-map>

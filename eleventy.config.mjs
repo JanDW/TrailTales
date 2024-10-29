@@ -25,6 +25,8 @@ export default function (eleventyConfig) {
     'src/assets/files',
     'src/assets/fonts',
     { 'src/assets/siteroot': '/' },
+    { 'node_modules/leaflet/dist': '/assets/scripts/leaflet' },
+    { 'node_modules/leaflet-gpx': '/assets/scripts/leaflet-gpx' },
   ];
 
   stuffToCopy.forEach((stuff) => {

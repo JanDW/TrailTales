@@ -7,7 +7,7 @@
     <style @raw="getBundle('css')" webc:keep></style>
   </head>
   <body>
-    <main @html="this.content"></main>
+    <main @raw="content"></main>
     <script @raw="getBundle('js')" webc:keep></script>
   </body>
 </html>

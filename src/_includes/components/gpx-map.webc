@@ -1,0 +1,59 @@
+<!--- gpx-map is a custom element that displays a map with a GPX file overlay. The GPX file is a GPS Exchange Format file that contains the path of a walk. The map is built using the Leaflet library, and the GPX file is added to the map using the Leaflet-GPX plugin. --->
+
+<div class="map" :id="uid"></div>
+
+<!--- @TODO These can't be bundled because they are copied over from node modules at build time, is there a workaround? --->
+
+<script webc:keep src="/assets/scripts/leaflet/leaflet.js"></script>
+<script webc:keep src="/assets/scripts/leaflet-gpx/gpx.js"></script>
+<link webc:keep rel="stylesheet" href="/assets/scripts/leaflet/leaflet.css" />
+
+<style webc:scoped>
+  :host {
+    display: block;
+  }
+
+  :host:not(:defined) > .map {
+    visibility: hidden;
+  }
+
+  :host > .map {
+    height: 700px;
+    width: 700px;
+  }
+</style>
+
+<script>
+  class GpxMap extends HTMLElement {
+    connectedCallback() {
+      const initialLat = 42.3415346;
+      const initialLng = -72.4946551;
+      const zoomLevel = 13;
+      // Get the WebC uid of the map element
+      const uid = this.querySelector('.map').getAttribute('id');
+      const gpxFile = '/assets/files/gpx/' + this.getAttribute('file');
+
+      let map = L.map(uid).setView([initialLat, initialLng], zoomLevel);
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+      }).addTo(map);
+
+      L.control.scale().addTo(map);
+
+      // Add GPX file
+      new L.GPX(gpxFile, {
+        async: true,
+        // disable waypoint markers for this GPX file that show every mile
+        markers: {
+          wptIcons: {},
+        },
+      })
+        .on('loaded', function (e) {
+          map.fitBounds(e.target.getBounds());
+        })
+        .addTo(map);
+    }
+  }
+  customElements.define('gpx-map', GpxMap);
+</script>

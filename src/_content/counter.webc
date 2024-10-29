@@ -12,6 +12,6 @@ permalink: /counter/index.html
   <!--- Also if I change `value` to `data-value` (and update my-counter to display that attribute) it doesn't render. Update: this is being discussed at https://github.com/11ty/webc/issues/71#issuecomment-1622181341 --->
   <my-counter @value="10"></my-counter>
   <my-counter @value="20"></my-counter>
-  <my-counter value="30"></my-counter>
-  <my-counter value="40"></my-counter>
+  <my-counter @value="30"></my-counter>
+  <my-counter @value="40"></my-counter>
 </form>
