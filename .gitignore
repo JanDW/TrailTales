@@ -130,3 +130,5 @@ dist
 .pnp.*
 
 www/
+
+.DS_Store

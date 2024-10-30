@@ -1,19 +1,12 @@
 ---
 layout: layout.webc
 permalink: /walks/index.html
-gpx_files:
-  - hike-with-senne.gpx
-  - Thursday Afternoon Run.gpx
-  - Monday Afternoon Walk.gpx
-  - Recovered.gpx
----
-
-<style>
-  * + * {
-    margin-block-start: 2em;
-  }
-</style>
+date: 2021-09-23
 
 <h1>Walks</h1>
 
-<gpx-map webc:for="gpx_file of gpx_files" :file="gpx_file"></gpx-map>
+<time
+  :@value="page.date"
+  @machine-format="yyyy-LL-dd"
+  @format="d LLLL yyyy"
+></time>

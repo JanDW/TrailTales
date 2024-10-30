@@ -1,0 +1,13 @@
+<script webc:type="js">
+  // @TODO I guess I need to use a commonJS import here, as the script needs to be type="js" instead of type="module"
+  const { DateTime } = require('luxon');
+  const dt =
+    value instanceof Date
+      ? DateTime.fromJSDate(value, { zone: 'utc' })
+      : DateTime.fromISO(value);
+
+  const datetime = machineFormat ? dt.toFormat(machineFormat) : dt.toISO();
+  const display = dt.toFormat(format || $data.site.dateFormat);
+
+  `<time webc:raw datetime="${datetime}">${display}</time>`;
+</script>
