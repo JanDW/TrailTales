@@ -5,7 +5,7 @@
   "main": ".prettier.config.js",
   "scripts": {
     "build": "eleventy --quiet && tailwindcss -i ./src/assets/styles/styles.css -o ./www/assets/styles/styles.css --minify",
-    "serve": "eleventy --serve --quiet",
+    "serve": "eleventy --serve --incremental",
     "debug": "node --inspect node_modules/.bin/eleventy --serve --incremental",
     "css": "tailwindcss -i ./src/assets/styles/styles.css -o ./www/assets/styles/styles.css --watch"
   },
@@ -15,6 +15,7 @@
   "type": "module",
   "devDependencies": {
     "@11ty/eleventy": "^3.0.0",
+    "@11ty/eleventy-fetch": "^4.0.1",
     "@11ty/eleventy-plugin-bundle": "^3.0.0",
     "@11ty/eleventy-plugin-webc": "^0.11.2",
     "@tailwindcss/typography": "^0.5.15",
@@ -22,7 +23,8 @@
     "prettier": "^3.3.3",
     "prettier-plugin-jinja-template": "^2.0.0",
     "prettier-plugin-tailwindcss": "^0.6.8",
-    "tailwindcss": "^3.4.13"
+    "tailwindcss": "^3.4.13",
+    "xmldom": "^0.6.0"
   },
   "dependencies": {
     "leaflet": "^1.9.4",

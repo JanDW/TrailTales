@@ -8,6 +8,6 @@
   </head>
   <body>
     <main @raw="content"></main>
-    <script @raw="getBundle('js')" webc:keep></script>
+    <script @raw="getBundle('js')" webc:keep type="module"></script>
   </body>
 </html>

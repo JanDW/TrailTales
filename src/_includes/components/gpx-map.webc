@@ -50,9 +50,6 @@
       new L.GPX(gpxFile, {
         async: true,
         // disable waypoint markers for this GPX file that show every mile
-        markers: {
-          wptIcons: {},
-        },
       })
         .on('loaded', function (e) {
           map.fitBounds(e.target.getBounds());

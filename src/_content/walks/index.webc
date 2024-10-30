@@ -2,11 +2,20 @@
 layout: layout.webc
 permalink: /walks/index.html
 date: 2021-09-23
+title: testing
+---
 
-<h1>Walks</h1>
+<h1 @text="title"></h1>
+
+<!--- <span @raw="console.log($data)"></span> --->
 
 <time
   :@value="page.date"
   @machine-format="yyyy-LL-dd"
   @format="d LLLL yyyy"
 ></time>
+
+<div webc:for="route of $data.gpx">
+  <h2 @text="route.name"></h2>
+  <gpx-map :file="route.fileName"></gpx-map>
+</div>
