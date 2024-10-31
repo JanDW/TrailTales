@@ -4,10 +4,10 @@
   xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <metadata>
-    <name>Recovered</name>
+    <name>Lawrence Swamp with Senne</name>
   </metadata>
   <trk>
-    <name>Recovered</name>
+    <name>Lawrence Swamp with Senne</name>
     <type>hiking</type>
     <wpt lat="42.3415346" lon="-72.4946551">
       <name>Start</name>

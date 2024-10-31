@@ -4,10 +4,6 @@
 
 <!--- @TODO These can't be bundled because they are copied over from node modules at build time, is there a workaround? --->
 
-<script webc:keep src="/assets/scripts/leaflet/leaflet.js"></script>
-<script webc:keep src="/assets/scripts/leaflet-gpx/gpx.js"></script>
-<link webc:keep rel="stylesheet" href="/assets/scripts/leaflet/leaflet.css" />
-
 <style webc:scoped>
   :host {
     display: block;
@@ -18,8 +14,11 @@
   }
 
   :host > .map {
-    height: 700px;
-    width: 700px;
+    height: 600px;
+    width: 600px;
+    border: 20px solid white;
+    border-radius: 16px;
+    box-shadow: var(--shadow-elevation-medium);
   }
 </style>
 
@@ -46,10 +45,34 @@
 
       L.control.scale().addTo(map);
 
+      // Define custom icons
+      const startIcon = L.icon({
+        iconUrl: '/assets/images/marker-icon-start.svg',
+        iconSize: [36, 36],
+        iconAnchor: [18, 36],
+        popupAnchor: [1, -34],
+      });
+
+      const endIcon = L.icon({
+        iconUrl: '/assets/images/marker-icon-end.svg',
+        iconSize: [36, 36],
+        iconAnchor: [18, 36],
+        popupAnchor: [1, -34],
+      });
+
       // Add GPX file
       new L.GPX(gpxFile, {
         async: true,
-        // disable waypoint markers for this GPX file that show every mile
+        polyline_options: {
+          color: '#ff4545',
+          opacity: 0.9,
+          weight: 4,
+          lineCap: 'round',
+        },
+        marker_options: {
+          startIcon: startIcon,
+          endIcon: endIcon,
+        },
       })
         .on('loaded', function (e) {
           map.fitBounds(e.target.getBounds());
