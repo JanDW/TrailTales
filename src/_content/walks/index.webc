@@ -34,7 +34,12 @@ title: Walks
     ></span
   ></span>
   </p>
-  <gpx-map :file="route.fileName"></gpx-map>
+  <gpx-map 
+    :file="route.fileName" 
+    :startLat="route.startWaypoint.lat" 
+    :startLong="route.startWaypoint.lon"
+  >
+  </gpx-map>
 </article>
 
 <style>

@@ -11,16 +11,21 @@ function removeExtensions(gpxDoc) {
   });
 }
 
-// Function to remove <wpt> elements except start and end, we don't need mile markers
 function removeWaypoints(gpxDoc) {
-  const waypoints = gpxDoc.getElementsByTagName('wpt');
-  console.log('Total waypoints:', waypoints.length);
-  Array.from(waypoints).forEach((waypoint, index) => {
-    waypoint.parentNode.removeChild(waypoint);
+  let removedElementCount = 0;
+  // Convert to a static array to avoid issues with live collections
+  const waypoints = Array.from(gpxDoc.getElementsByTagName('wpt'));
+  waypoints.forEach((waypoint, index) => {
+    // Remove all waypoints except the start and end
+    if (index !== 0 && index !== waypoints.length - 1) {
+      waypoint.parentNode.removeChild(waypoint);
+      removedElementCount++;
+    }
   });
 }
 
 // Haversine formula to calculate distance between two points
+// @TODO leaflet-gpx has a built-in method to calculate the distance
 function haversineDistance(lat1, lon1, lat2, lon2) {
   const R = 6371; // Earth's radius in km
   const toRad = (x) => (x * Math.PI) / 180;

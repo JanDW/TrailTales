@@ -25,14 +25,15 @@
 <script>
   class GpxMap extends HTMLElement {
     connectedCallback() {
-      const initialLat = 42.3415346;
-      const initialLng = -72.4946551;
-      const zoomLevel = 13;
       // Get the WebC uid of the map element
       const uid = this.querySelector('.map').getAttribute('id');
       const gpxFile = '/assets/files/gpx/' + this.getAttribute('file');
 
-      let map = L.map(uid).setView([initialLat, initialLng], zoomLevel);
+      const startLat = parseFloat(this.getAttribute('startLat'));
+      const startLong = parseFloat(this.getAttribute('startLong'));
+      const zoomLevel = 13;
+
+      let map = L.map(uid).setView([startLat, startLong], zoomLevel);
 
       L.tileLayer(
         'https://api.maptiler.com/maps/outdoor-v2/{z}/{x}/{y}.png?key=UoQ5TMGbt6J7x0RXurZ4',
@@ -45,21 +46,6 @@
 
       L.control.scale().addTo(map);
 
-      // Define custom icons
-      const startIcon = L.icon({
-        iconUrl: '/assets/images/marker-icon-start.svg',
-        iconSize: [36, 36],
-        iconAnchor: [18, 36],
-        popupAnchor: [1, -34],
-      });
-
-      const endIcon = L.icon({
-        iconUrl: '/assets/images/marker-icon-end.svg',
-        iconSize: [36, 36],
-        iconAnchor: [18, 36],
-        popupAnchor: [1, -34],
-      });
-
       // Add GPX file
       new L.GPX(gpxFile, {
         async: true,
@@ -69,9 +55,14 @@
           weight: 4,
           lineCap: 'round',
         },
+        markers: {
+          startIcon: '/assets/images/marker-icon-start.svg',
+          endIcon: '/assets/images/marker-icon-end.svg',
+          wptIcons: { null: null },
+        },
         marker_options: {
-          startIcon: startIcon,
-          endIcon: endIcon,
+          iconSize: [18, 18],
+          iconAnchor: [13, 10],
         },
       })
         .on('loaded', function (e) {
