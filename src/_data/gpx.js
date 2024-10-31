@@ -49,8 +49,6 @@ export default function () {
   try {
     //@TODO need to extract the path to the gpx files from a central config
     const gpxFilesPath = path.resolve(__dirname, '../assets/gpx');
-    console.log('Reading GPX files from:', gpxFilesPath);
-    debugger;
     const gpxFiles = fs.readdirSync(gpxFilesPath);
 
     // Read and process the content of each file
@@ -99,13 +97,9 @@ export default function () {
       //@TODO How do I reference the output dir configured in eleventy? eleventy.directories.output
 
       const outputPath = path.join(__dirname, `../../www/assets/files/gpx`);
-
-      console.log('Writing to:', outputPath);
-
       fs.mkdirSync(outputPath, { recursive: true });
 
       const filePath = path.join(outputPath, gpxFile);
-      console.log('Writing to:', filePath);
       fs.writeFileSync(filePath, gpxStringClean);
 
       // Prepare the data
@@ -130,8 +124,6 @@ export default function () {
         },
       };
     });
-
-    console.log(gpxData[0].fileName);
 
     // Sort the gpxData array in reverse chronological order by startWaypoint.time
     gpxData.sort(
