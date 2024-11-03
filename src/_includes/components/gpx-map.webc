@@ -14,8 +14,8 @@
   }
 
   :host > .map {
-    height: 600px;
-    width: 600px;
+    height: 700px;
+    width: 700px;
     border: 20px solid white;
     border-radius: 16px;
     box-shadow: var(--shadow-elevation-medium);

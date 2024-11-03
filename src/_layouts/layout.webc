@@ -1,9 +1,13 @@
+---
+docTitle: TrailTales
+---
+
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document Title is something</title>
+    <title @text="docTitle"></title>
     <style @raw="getBundle('css')" webc:keep></style>
   </head>
   <body>

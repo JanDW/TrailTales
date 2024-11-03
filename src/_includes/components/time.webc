@@ -1,11 +1,23 @@
 <script webc:type="js">
+  /**
+   * Renders a date and time in a specified timezone.
+   *
+   * @param {Date|string} value - The date or ISO string to be formatted.
+   * @param {string} [timezone='America/New_York'] - The timezone to render the date in.
+   * @param {string} [machineFormat] - The format for the datetime attribute.
+   * @param {string} [format] - The format for displaying the date.
+   * @param {Object} $data - The data object containing site configuration.
+   * @returns {string} The formatted time element as a string.
+   */
+
   // @TODO I guess I need to use a commonJS import here, as the script needs to be type="js" instead of type="module"
 
   const { DateTime } = require('luxon');
+  const tz = timezone || 'America/New_York';
   const dt =
     value instanceof Date
-      ? DateTime.fromJSDate(value, { zone: 'utc' })
-      : DateTime.fromISO(value);
+      ? DateTime.fromJSDate(value, { zone: tz })
+      : DateTime.fromISO(value, { zone: tz });
 
   const datetime = machineFormat ? dt.toFormat(machineFormat) : dt.toISO();
   const display = dt.toFormat(format || $data.site.dateFormat);

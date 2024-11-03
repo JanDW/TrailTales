@@ -1,0 +1,3 @@
+<script webc:keep src="/assets/scripts/leaflet/leaflet.js"></script>
+<script webc:keep src="/assets/scripts/leaflet-gpx/gpx.js"></script>
+<link webc:keep rel="stylesheet" href="/assets/scripts/leaflet/leaflet.css" />
