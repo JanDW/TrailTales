@@ -1,0 +1,5 @@
+---
+layout: layout.webc
+---
+
+<div @raw="content"></div>

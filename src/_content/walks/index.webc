@@ -22,6 +22,7 @@ title: Walks listing
   ></time>
 </p>
 
+<!-- <span @raw="console.log($data.gpx)"></span> -->
 <article webc:for="route of $data.gpx">
   <!--- <span @text="console.log(route)"></span> --->
   <h2>
@@ -61,7 +62,7 @@ title: Walks listing
 
   <div @raw="images[photo.img].exif.LensModel"></div>
 
-  <div @raw="console.log(images[photo.img].exif)"></div>
+  <!--- <div @raw="console.log(images[photo.img].exif)"></div> --->
 
   <img :src="(`/assets/images/${photo.img}.jpeg`)" :alt="photo.alt" />
   <leaflet-includes webc:nokeep></leaflet-includes>

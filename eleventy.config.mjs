@@ -1,6 +1,7 @@
 import markdownIt from 'markdown-it';
 import webCPlugin from '@11ty/eleventy-plugin-webc';
 import prettier from './src/transforms/prettier.js';
+import { EleventyRenderPlugin } from '@11ty/eleventy';
 import yaml from 'js-yaml';
 import exifr from 'exifr';
 let formatTitle;
@@ -54,6 +55,8 @@ export default function (eleventyConfig) {
     ],
   });
 
+  eleventyConfig.addPlugin(EleventyRenderPlugin);
+
   // Add Custom Data Extensions YAML
   eleventyConfig.addDataExtension('yaml', (contents) => yaml.load(contents));
   eleventyConfig.addDataExtension('png,jpeg', {
@@ -80,9 +83,8 @@ export default function (eleventyConfig) {
       input: 'src',
       output: 'www',
     },
-    templateFormats: ['md', 'html', 'webc'],
-    markdownTemplateEngine: 'webc',
-    htmlTemplateEngine: 'webc',
-    dataTemplateEngine: 'webc',
+    templateFormats: ['webc', 'js', 'md'],
+    markdownTemplateEngine: 'njk',
+    htmlTemplateEngine: 'njk',
   };
 }
