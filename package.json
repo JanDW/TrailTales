@@ -7,7 +7,8 @@
     "build": "eleventy --quiet && tailwindcss -i ./src/assets/styles/styles.css -o ./www/assets/styles/styles.css --minify",
     "serve": "eleventy --serve --incremental",
     "debug": "node --inspect node_modules/.bin/eleventy --serve --incremental",
-    "css": "tailwindcss -i ./src/assets/styles/styles.css -o ./www/assets/styles/styles.css --watch"
+    "css": "tailwindcss -i ./src/assets/styles/styles.css -o ./www/assets/styles/styles.css --watch",
+    "rm": "rm -rf ./www/"
   },
   "keywords": [],
   "author": "Jan De Wilde",
