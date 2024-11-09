@@ -1,18 +1,12 @@
----js
-let layout = 'walks.webc'
-let title = 'First Hike Senne'
-let gpxFile = '09_21_24-first-hike-senne.gpx'
+---
+title: 'First Hike Senne'
+gpxFile: '09_21_24-first-hike-senne.gpx'
 
-let eleventyComputed = {
-  permalink: (data) => `/walks/${data.page.fileSlug}/index.html`
-}
-let photos = [{
-  src: 'birchpolypore_9_21_24-1',
-  alt: 'Birch polypore'
-},{
-  src: 'destroying-angel_10_27_24-1',
-  alt: 'Destroying angel'
-}]
+photos:
+  - src: 'birchpolypore_9_21_24-1'
+    alt: 'Birch polypore'
+  - src: 'destroying-angel_10_27_24-1'
+    alt: 'Destroying angel'
 ---
 
 <script webc:setup>
@@ -31,10 +25,9 @@ let photos = [{
 
 <!-- <span @raw="console.log($data.gpx)"></span> -->
 
->
 <!--- @TODO Update structure of `gpx` so I can reference it  --->
 <gpx-map
   :file="{{ gpxFile }}"
-  :startLat="`${lat}`"
-  :startLong="`${lon}`"
+  :startLat="{{ lat }}"
+  :startLong="{{ lon }}"
 ></gpx-map>
