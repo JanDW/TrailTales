@@ -2,4 +2,22 @@
 layout: layout.webc
 ---
 
-<div @raw="content"></div>
+<script webc:setup>
+  // Match the filename of the gpx file to the one in the global data object
+  const gpxData = $data.gpx.filter((gpxItem) => gpxItem.fileName === gpxFile);
+  const lat = gpxData[0].startWaypoint.lat;
+  const lon = gpxData[0].startWaypoint.lon;
+</script>
+
+<leaflet-includes webc:nokeep></leaflet-includes>
+
+<h1 @text="title"></h1>
+
+<!-- <span @raw="console.log($data.gpx)"></span> -->
+<gpx-map
+  :file="{{ gpxFile }}"
+  :startLat="{{ lat }}"
+  :startLong="{{ lon }}"
+></gpx-map>
+
+<div @raw="content" webc:nokeep></div>

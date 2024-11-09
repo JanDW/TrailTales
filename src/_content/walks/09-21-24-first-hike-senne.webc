@@ -9,25 +9,4 @@ photos:
     alt: 'Destroying angel'
 ---
 
-<script webc:setup>
-  function getGpxData(gpxFile) {
-    const result = $data.gpx.filter((gpxItem) => gpxItem.fileName === gpxFile);
-    return result;
-  }
-
-  let gpxData = getGpxData(gpxFile);
-
-  let lat = gpxData[0].startWaypoint.lat;
-  let lon = gpxData[0].startWaypoint.lon;
-</script>
-
-<leaflet-includes webc:nokeep></leaflet-includes>
-
-<!-- <span @raw="console.log($data.gpx)"></span> -->
-
-<!--- @TODO Update structure of `gpx` so I can reference it  --->
-<gpx-map
-  :file="{{ gpxFile }}"
-  :startLat="{{ lat }}"
-  :startLong="{{ lon }}"
-></gpx-map>
+Hello world.
