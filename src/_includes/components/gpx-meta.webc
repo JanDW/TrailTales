@@ -1,0 +1,31 @@
+<!---
+  This component, gpx-meta.webc, dynamically renders metadata for a GPX route.
+  It includes:
+  - A heading element with a level specified by the headingLevel prop, displaying the route's name.
+  - Three time elements showing the start date, start time, and end time of the route.
+  - A span element displaying the total distance in kilometers.
+  - A span element displaying the total distance in miles.
+  The heading level is dynamically set to enable use in different contexts.
+--->
+
+<!---
+@BUG ? ↓ was hoping to do this with <heading webc:is="headinglevel" @text="route.trkName"></heading> 
+
+However, the heading prop doesn't get interpolated, and the rendered element is <headinglevel>. 
+
+I'm missing the point of this, how is webc:is useful if it can't be dynamically set? Maybe I need to wrap headinglevel? 
+--->
+
+<script webc:type="js">
+  `<${headinglevel}>${route.trkName}</${headinglevel}>`;
+</script>
+
+<p>
+  <time :@value="route.startWaypoint.time" @format="d LLL yyyy"></time>
+  <time :@value="route.startWaypoint.time" @format="h:mm a"></time>
+  <time :@value="route.endWaypoint.time" @format="h:mm a"></time>
+  <span @text="route.totalDistance + ` km`"></span> /
+  <span
+    @text="parseFloat(route.totalDistance * 0.6213712).toFixed(2) + ` miles`"
+  ></span>
+</p>

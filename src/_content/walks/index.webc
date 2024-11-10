@@ -2,10 +2,8 @@
 layout: layout.webc
 docTitle: Walks · TrailTales
 photos:
-  - img: birchpolypore_9_21_24-1
-    alt: Birch polypore
-  - img: destroying-angel_10_27_24-1
-    alt: Destroying angel
+  - img: '09-21-24-first-hike-senne - 1'
+  - img: '09-21-24-first-hike-senne - 2'
 title: Walks listing
 ---
 
@@ -63,7 +61,7 @@ title: Walks listing
 
   <!--- <div @raw="console.log(images[photo.img].exif)"></div> --->
 
-  <img :src="(`/assets/images/${photo.img}.jpeg`)" :alt="photo.alt" />
+  <img :src="(`/assets/images/${photo.img}.jpeg`)" :alt="photo.caption" />
   <leaflet-includes webc:nokeep></leaflet-includes>
 </div>
 

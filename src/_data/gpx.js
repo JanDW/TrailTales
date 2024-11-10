@@ -105,7 +105,6 @@ export default function () {
       // Prepare the data
       return {
         fileName: gpxFile,
-        // gpxString: gpxStringClean,
         trkName,
         totalDistance: totalDistance.toFixed(2),
         startWaypoint: {

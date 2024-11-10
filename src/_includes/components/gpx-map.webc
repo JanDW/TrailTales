@@ -46,6 +46,13 @@
 
       L.control.scale().addTo(map);
 
+      let cameraIcon = L.icon({
+        iconUrl: '/assets/images/marker-icon-camera.svg',
+        iconSize: [18, 18],
+        iconAnchor: [16, 16],
+        popupAnchor: [-8, -16],
+      });
+
       // Add GPX file
       new L.GPX(gpxFile, {
         async: true,
@@ -69,6 +76,18 @@
           map.fitBounds(e.target.getBounds());
         })
         .addTo(map);
+
+      // Render markers for photos
+      const markers = document.querySelectorAll('.marker');
+      markers.forEach((marker) => {
+        const lat = marker.getAttribute('data-lat');
+        const lon = marker.getAttribute('data-lon');
+        const id = marker.querySelector('h3').getAttribute('id');
+        const caption = marker.querySelector('img').getAttribute('alt');
+        L.marker([lat, lon], { icon: cameraIcon })
+          .addTo(map)
+          .bindPopup(`<a href="#${id}">${caption}</a>`);
+      });
     }
   }
   customElements.define('gpx-map', GpxMap);

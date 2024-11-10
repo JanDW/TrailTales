@@ -1,11 +1,14 @@
 ---
 title: 'First Hike Senne'
 gpxFile: '09_21_24-first-hike-senne.gpx'
+sighting:
+  - name: 'Amanita bisporigera'
+    images: ['destroying-angel_10_27_24-1']
 
 photos:
-  - src: 'birchpolypore_9_21_24-1'
+  - src: '09-21-24-first-hike-senne - 1'
     alt: 'Birch polypore'
-  - src: 'destroying-angel_10_27_24-1'
+  - src: '09-21-24-first-hike-senne - 2'
     alt: 'Destroying angel'
 ---
 
