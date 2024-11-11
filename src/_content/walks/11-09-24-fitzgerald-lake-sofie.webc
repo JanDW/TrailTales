@@ -1,4 +1,5 @@
 ---
+layout: walks.webc
 title: 'Fitzgerald Lake with Sofie'
 gpxFile: '11-09-24-fitzgerald-lake-sofie.gpx'
 photos:
@@ -9,4 +10,4 @@ photos:
   - src: '11-09-24-fitzgerald-lake-sofie - 5'
 ---
 
-Hello world.
+Snickerdoodle. test.

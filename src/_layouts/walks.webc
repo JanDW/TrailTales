@@ -1,24 +1,25 @@
 ---
-layout: layout.webc
 ---
 
 <script webc:setup>
-  // Match the filename of the gpx file to the one in the global data object
-  let [gpxData] = $data.gpx.filter((gpxItem) => gpxItem.fileName === gpxFile);
-  console.log({ gpxData, gpxFile });
+  console.log({ gpxData });
+  // console.log({ $data });
 
-  const lat = gpxData.startWaypoint.lat;
-  const lon = gpxData.startWaypoint.lon;
+  // // Match the filename of the gpx file to the one in the global data object
+  // let [gpxData] = $data.gpx.filter((gpxItem) => gpxItem.fileName === gpxFile);
 
-  // Add GPS data to the photos
-  const shots = photos.map((photo) => {
-    photo.lat = images[photo.src].exif.latitude;
-    photo.lon = images[photo.src].exif.longitude;
-    photo.caption = images[photo.src].exif.Caption;
-    photo.dateTime = images[photo.src].exif.DateTimeOriginal;
-    photo.lens = images[photo.src].exif.LensModel;
-    return photo;
-  });
+  // const lat = gpxData.startWaypoint.lat;
+  // const lon = gpxData.startWaypoint.lon;
+
+  // // Add GPS data to the photos
+  // const shots = photos.map((photo) => {
+  //   photo.lat = images[photo.src].exif.latitude;
+  //   photo.lon = images[photo.src].exif.longitude;
+  //   photo.caption = images[photo.src].exif.Caption;
+  //   photo.dateTime = images[photo.src].exif.DateTimeOriginal;
+  //   photo.lens = images[photo.src].exif.LensModel;
+  //   return photo;
+  // });
 
   // console.log(photos);
 </script>

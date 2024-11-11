@@ -2,8 +2,8 @@
 layout: layout.webc
 docTitle: Walks · TrailTales
 photos:
-  - img: '09-21-24-first-hike-senne - 1'
-  - img: '09-21-24-first-hike-senne - 2'
+  - src: '09-21-24-first-hike-senne - 1'
+  - src: '09-21-24-first-hike-senne - 2'
 title: Walks listing
 ---
 
@@ -42,26 +42,26 @@ title: Walks listing
   </gpx-map>
 </article>
 <div webc:for="photo of photos">
-  <div @raw="images[photo.img].exif.title.value"></div>
-  <div @raw="images[photo.img].exif.Keywords"></div>
-  <div @raw="images[photo.img].exif.longitude"></div>
-  <div @raw="images[photo.img].exif.latitude"></div>
-  <div @raw="images[photo.img].exif.Caption"></div>
+  <div @raw="images[photo.src].exif.title.value"></div>
+  <div @raw="images[photo.src].exif.Keywords"></div>
+  <div @raw="images[photo.src].exif.longitude"></div>
+  <div @raw="images[photo.src].exif.latitude"></div>
+  <div @raw="images[photo.src].exif.Caption"></div>
   <time
-    :@value="images[photo.img].exif.DateTimeOriginal"
+    :@value="images[photo.src].exif.DateTimeOriginal"
     @format="d LLL yyyy"
   ></time>
   at
   <time
-    :@value="images[photo.img].exif.DateTimeOriginal"
+    :@value="images[photo.src].exif.DateTimeOriginal"
     @format="h:mm a"
   ></time>
 
-  <div @raw="images[photo.img].exif.LensModel"></div>
+  <div @raw="images[photo.src].exif.LensModel"></div>
 
-  <!--- <div @raw="console.log(images[photo.img].exif)"></div> --->
+  <!--- <div @raw="console.log(images[photo.src].exif)"></div> --->
 
-  <img :src="(`/assets/images/${photo.img}.jpeg`)" :alt="photo.caption" />
+  <img :src="(`/assets/images/${photo.src}.jpeg`)" :alt="photo.caption" />
   <leaflet-includes webc:nokeep></leaflet-includes>
 </div>
 
