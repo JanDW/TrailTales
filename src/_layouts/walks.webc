@@ -22,7 +22,7 @@ layout: layout
   ></gpx-map>
 </article>
 <div webc:for="photo of photos" webc:nokeep>
-  <photo :photo="photo"></photo>
+  <photo :@photo="photo"></photo>
 </div>
 
 <div @raw="content" webc:nokeep></div>

@@ -48,7 +48,7 @@
 
       let cameraIcon = L.icon({
         iconUrl: '/assets/images/marker-icon-camera.svg',
-        iconSize: [18, 18],
+        iconSize: [24, 24],
         iconAnchor: [16, 16],
         popupAnchor: [-8, -16],
       });
