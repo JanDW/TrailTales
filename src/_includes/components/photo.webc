@@ -1,0 +1,28 @@
+<!--- data-lat and data-long are used to plot markers on leaflet map --->
+<figure class="marker" :data-lat="photo.lat" :data-lon="photo.lon">
+  <figcaption>
+    <h3 :id="uid">
+      <a
+        @if="photo.iNatTaxa"
+        :href="`https://www.inaturalist.org/taxa/${photo.iNatTaxa}`"
+      >
+        <span @text="photo.title" webc:nokeep></span>
+      </a>
+    </h3>
+    <ul>
+      <li><i @text="photo.caption"></i></li>
+      <li>
+        <time :@value="photo.dateTime" @format="d LLL yyyy"></time> at
+        <time :@value="photo.dateTime" @format="h:mm a"></time>
+      </li>
+      <li><span @text="photo.lens"></span></li>
+    </ul>
+  </figcaption>
+  <img :src="(`/assets/images/${photo.src}.jpeg`)" :alt="photo.caption" />
+</figure>
+
+<style webc:scoped>
+  img {
+    max-width: 600px;
+  }
+</style>

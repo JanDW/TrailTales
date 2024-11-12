@@ -8,10 +8,18 @@ docTitle: TrailTales
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title @text="docTitle"></title>
+    <link rel="stylesheet" href="../assets/styles/styles.css" />
     <style @raw="getBundle('css')" webc:keep></style>
+    <slot name="head"></slot>
   </head>
   <body>
+    <header>
+      <slot name="header"></slot>
+    </header>
     <main @raw="content"></main>
+    <footer>
+      <slot name="footer"></slot>
+    </footer>
     <script @raw="getBundle('js')" webc:keep type="module"></script>
   </body>
 </html>

@@ -1,61 +1,34 @@
 ---
+layout: layout
 ---
 
+<!--- 
 <script webc:setup>
-  console.log({ gpxData });
-  // console.log({ $data });
-
-  // // Match the filename of the gpx file to the one in the global data object
-  // let [gpxData] = $data.gpx.filter((gpxItem) => gpxItem.fileName === gpxFile);
-
-  // const lat = gpxData.startWaypoint.lat;
-  // const lon = gpxData.startWaypoint.lon;
-
-  // // Add GPS data to the photos
-  // const shots = photos.map((photo) => {
-  //   photo.lat = images[photo.src].exif.latitude;
-  //   photo.lon = images[photo.src].exif.longitude;
-  //   photo.caption = images[photo.src].exif.Caption;
-  //   photo.dateTime = images[photo.src].exif.DateTimeOriginal;
-  //   photo.lens = images[photo.src].exif.LensModel;
-  //   return photo;
-  // });
-
-  // console.log(photos);
+  // console.log({ gpxData });
 </script>
-
-<!--- Load JS and CSS for Leaflet --->
-<leaflet-includes webc:nokeep></leaflet-includes>
+--->
 
 <h1 @text="title"></h1>
 
 <!-- <span @raw="console.log($data.gpx)"></span> -->
 <article>
   <gpx-meta :@route="{{ gpxData }}" @headingLevel="h4"></gpx-meta>
-
+  <leaflet-includes></leaflet-includes>
   <gpx-map
     :file="{{ gpxFile }}"
     :@route="{{ gpxData }}"
-    :startLat="{{ lat }}"
-    :startLong="{{ lon }}"
+    :startLat="{{ gpxData.startWaypoint.lat }}"
+    :startLong="{{ gpxData.startWaypoint.lon }}"
   ></gpx-map>
 </article>
-
 <div webc:for="photo of photos" webc:nokeep>
-  <figure class="marker" :data-lat="photo.lat" :data-lon="photo.lon">
-    <figcaption>
-      <h3 :id="uid" @text="photo.caption"></h3>
-      <ul>
-        <li><i @text="photo.caption"></i></li>
-        <li>
-          <time :@value="photo.dateTime" @format="d LLL yyyy"></time> at
-          <time :@value="photo.dateTime" @format="h:mm a"></time>
-        </li>
-        <li><span @text="photo.lens"></span></li>
-      </ul>
-    </figcaption>
-    <img :src="(`/assets/images/${photo.src}.jpeg`)" :alt="photo.caption" />
-  </figure>
+  <photo :photo="photo"></photo>
 </div>
 
 <div @raw="content" webc:nokeep></div>
+
+<style>
+  img {
+    max-width: 800px;
+  }
+</style>

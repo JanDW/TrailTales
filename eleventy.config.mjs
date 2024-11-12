@@ -19,6 +19,9 @@ export default function (eleventyConfig) {
   eleventyConfig.setLibrary('md', markdownLib);
   eleventyConfig.setUseGitIgnore(true);
 
+  // Shouldn't have to add this, but walks.11tydata.js is being copied to the output directory @FIX
+  eleventyConfig.ignores.add('**/*.11tydata.js');
+
   // Passthroughs
   const stuffToCopy = [
     'src/assets/styles/styles.css',
