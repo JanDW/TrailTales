@@ -16,5 +16,8 @@ An app for logging sightings (myco, fauna, flora) during walks
 - roll up leaflet css and js in asset bundle
 
 ## Colofon
-11ty, webc, webcomponents, leaflet,
-GPX, Exif
+
+Made with 11ty (SSG), web components, WebC (sort of like SSR for web components), leaflet,
+leaflet GPX, Exifr for extracting EXIF data.
+
+No build system, no frameworks, 

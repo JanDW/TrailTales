@@ -19,6 +19,23 @@
     box-shadow: var(--shadow-elevation-medium);
     height: 100vh;
   }
+
+  :host .photo-marker {
+    text-decoration: none;
+    font-weight: 500;
+    text-align: center;
+  }
+
+  :host .photo-marker i {
+    color: #999;
+    display: block;
+  }
+
+  :host .photo-marker:hover {
+    text-decoration: underline;
+  }
+
+  :host .leaflet-popup-close-button {display: none;}
 </style>
 
 <script>
@@ -82,10 +99,11 @@
         const lat = marker.getAttribute('data-lat');
         const lon = marker.getAttribute('data-lon');
         const id = marker.querySelector('h3').getAttribute('id');
+        const title = marker.querySelector('h3 > a').textContent;
         const caption = marker.querySelector('img').getAttribute('alt');
         L.marker([lat, lon], { icon: cameraIcon })
           .addTo(map)
-          .bindPopup(`<a href="#${id}">${caption}</a>`);
+          .bindPopup(`<a href="#${id}" class="photo-marker">${title}<i>(${caption})</i></a>`);
       });
     }
   }
