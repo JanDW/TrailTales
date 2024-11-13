@@ -1,5 +1,4 @@
 ---
-title: 'Fitzgerald Lake with Sofie'
 gpxFile: '11-09-24-fitzgerald-lake-sofie.gpx'
 photos:
   - src: '11-09-24-fitzgerald-lake-sofie - 1'
@@ -14,4 +13,10 @@ photos:
     iNatTaxa: 124102
 ---
 
-Snickerdoodle. test.
+<template webc:type="11ty" 11ty:type="liquid, md">
+Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+
+Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Maecenas faucibus mollis interdum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
+
+Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Aenean lacinia bibendum nulla sed consectetur.
+</template>

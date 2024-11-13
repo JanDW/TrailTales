@@ -14,3 +14,7 @@ An app for logging sightings (myco, fauna, flora) during walks
 
 - Static map API tiles cached with eleventy fetch
 - roll up leaflet css and js in asset bundle
+
+## Colofon
+11ty, webc, webcomponents, leaflet,
+GPX, Exif

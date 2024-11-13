@@ -8,27 +8,36 @@ layout: layout
 </script>
 --->
 
-<h1 @text="title"></h1>
-
-<!-- <span @raw="console.log($data.gpx)"></span> -->
+<leaflet-includes webc:nokeep></leaflet-includes>
 <article>
-  <gpx-meta :@route="{{ gpxData }}" @headingLevel="h4"></gpx-meta>
-  <leaflet-includes></leaflet-includes>
-  <gpx-map
-    :file="{{ gpxFile }}"
-    :@route="{{ gpxData }}"
-    :startLat="{{ gpxData.startWaypoint.lat }}"
-    :startLong="{{ gpxData.startWaypoint.lon }}"
-  ></gpx-map>
-</article>
-<div webc:for="photo of photos" webc:nokeep>
-  <photo :@photo="photo"></photo>
-</div>
 
-<div @raw="content" webc:nokeep></div>
+ <split-viewport>
+  <div slot="left"></div>
+  <div slot="right">
+    <gpx-meta :@route="{{ gpxData }}" @headingLevel="h1"></gpx-meta>
+    <div @raw="content" webc:nokeep></div>
+  </div>
 
-<style>
-  img {
-    max-width: 800px;
-  }
+ </split-viewport>
+
+<split-viewport>
+  <div slot="left" webc:nokeep>
+    <gpx-map
+      :file="{{ gpxFile }}"
+      :@route="{{ gpxData }}"
+      :startLat="{{ gpxData.startWaypoint.lat }}"
+      :startLong="{{ gpxData.startWaypoint.lon }}"
+      style="position: sticky; top: 0;"
+    ></gpx-map>
+  </div>
+  <div slot="right" style="overflow-y: scroll">
+    <!-- <span @raw="console.log($data.gpx)"></span> -->
+    <div webc:for="photo of photos" webc:nokeep>
+      <photo :@photo="photo"></photo>
+    </div>
+  </div>
+  </article>
+</split-viewport>
+
+<style webc:scoped>
 </style>

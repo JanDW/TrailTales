@@ -1,0 +1,17 @@
+<div class="left-side">
+  <slot name="left"></slot>
+</div>
+<div class="right-side">
+  <slot name="right"></slot>
+</div>
+
+<style webc:scoped>
+  :host {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  :host > * {
+    isolation: isolate;
+  }
+</style>

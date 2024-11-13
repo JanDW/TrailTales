@@ -13,9 +13,6 @@ docTitle: TrailTales
     <slot name="head"></slot>
   </head>
   <body>
-    <header>
-      <slot name="header"></slot>
-    </header>
     <main @raw="content"></main>
     <footer>
       <slot name="footer"></slot>

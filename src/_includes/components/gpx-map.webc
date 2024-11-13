@@ -14,11 +14,10 @@
   }
 
   :host > .map {
-    height: 700px;
-    width: 700px;
     border: 20px solid white;
     border-radius: 16px;
     box-shadow: var(--shadow-elevation-medium);
+    height: 100vh;
   }
 </style>
 

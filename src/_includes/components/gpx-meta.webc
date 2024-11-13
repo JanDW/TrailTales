@@ -15,17 +15,18 @@ However, the heading prop doesn't get interpolated, and the rendered element is 
 
 I'm missing the point of this, how is webc:is useful if it can't be dynamically set? Maybe I need to wrap headinglevel? 
 --->
+<header>
+  <script webc:type="js">
+    `<${headinglevel}>${route.trkName}</${headinglevel}>`;
+  </script>
 
-<script webc:type="js">
-  `<${headinglevel}>${route.trkName}</${headinglevel}>`;
-</script>
-
-<p>
-  <time :@value="route.startWaypoint.time" @format="d LLL yyyy"></time>
-  <time :@value="route.startWaypoint.time" @format="h:mm a"></time>
-  <time :@value="route.endWaypoint.time" @format="h:mm a"></time>
-  <span @text="route.totalDistance + ` km`"></span> /
-  <span
-    @text="parseFloat(route.totalDistance * 0.6213712).toFixed(2) + ` miles`"
-  ></span>
-</p>
+  <p>
+    <time :@value="route.startWaypoint.time" @format="d LLL yyyy"></time>
+    <time :@value="route.startWaypoint.time" @format="h:mm a"></time>
+    <time :@value="route.endWaypoint.time" @format="h:mm a"></time>
+    <span @text="route.totalDistance + ` km`"></span> /
+    <span
+      @text="parseFloat(route.totalDistance * 0.6213712).toFixed(2) + ` miles`"
+    ></span>
+  </p>
+</header>

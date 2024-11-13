@@ -21,8 +21,4 @@
   <img :src="(`/assets/images/${photo.src}.jpeg`)" :alt="photo.caption" />
 </figure>
 
-<style webc:scoped>
-  img {
-    max-width: 600px;
-  }
-</style>
+<style webc:scoped></style>
