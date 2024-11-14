@@ -2,9 +2,9 @@ import markdownIt from 'markdown-it';
 import webCPlugin from '@11ty/eleventy-plugin-webc';
 import prettier from './src/transforms/prettier.js';
 import { EleventyRenderPlugin } from '@11ty/eleventy';
+import EleventyFetch from '@11ty/eleventy-fetch';
 import yaml from 'js-yaml';
 import exifr from 'exifr';
-let formatTitle;
 
 export default function (eleventyConfig) {
   const mdOptions = {

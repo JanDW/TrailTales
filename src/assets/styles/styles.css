@@ -1,55 +1,124 @@
-/* 1. Use a more-intuitive box-sizing model */
+:root {
+  --measure: 63ch;
+}
+
+/* Reset after Josh Comeau & Andy Bell */
+
 *, *::before, *::after {
   box-sizing: border-box;
 }
 
-/* 2. Remove default margin */
 * {
   margin: 0;
 }
 
-body {
-  /* 4. Improve text rendering */
-  -webkit-font-smoothing: antialiased;
-  /* 3. Add accessible line-height */
-  line-height: 1.5;
+html {
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
 }
 
-/* 5. Improve media defaults */
+body {
+  background-color: hsl(100, 100%, 100%);
+  /* 3. Add accessible line-height */
+  font-size: var(--step-0);
+  /* 4. Improve text rendering */
+  -webkit-font-smoothing: antialiased;
+  font-weight: 500;
+  line-height: 1.5;
+  min-height: 100vh;
+  padding: var(--space-3xs);
+}
+
+a:not([class]) {
+  color: currentColor;
+  text-decoration-skip-ink: auto;
+}
+
+ul[role='list'],
+ol[role='list'] {
+  list-style: none;
+}
+
 img, picture, video, canvas, svg {
   display: block;
   max-width: 100%;
 }
 
-/* 6. Inherit fonts for form controls */
 input, button, textarea, select {
   font: inherit;
 }
 
-/* 7. Avoid text overflows */
-p, h1, h2, h3, h4, h5, h6 {
+textarea:not([rows]) {
+  min-height: 10em;
+}
+
+h1, h2, h3, h4,
+button, input, label {
+  line-height: 1.1;
+}
+
+
+p, h1, h2, h3, h4 {
+  max-width: var(--measure);
   overflow-wrap: break-word;
 }
 
-/* 8. Improve line wrapping */
 p {
   text-wrap: pretty;
 }
-h1, h2, h3, h4, h5, h6 {
+
+h1, h2, h3, h4 {
+  color: hsl(45, 80%, 60%);
   text-wrap: balance;
 }
 
-/*
-  9. Create a root stacking context
-*/
-#root, #__next {
-  isolation: isolate;
+:target {
+  scroll-margin-block: 5ex;
 }
 
 :root {
-  --system-ui: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --body-font: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --display-font: retripsregular, var(--body-font);
 }
 
 body {
-  font-family: var(--system-ui);
+  background-color: white;
+  font-family: var(--body-font);
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--display-font);
+  font-weight: 400;
+}
+
+h1, .h1 {
+  font-size: var(--step-4);
+  line-height: var(--space-l);
+}
+
+h2, .h2 {
+  font-size: var(--step-3);
+  line-height: var(--space-l);
+}
+
+h3, .h3 {
+  font-size: var(--step-2);
+  line-height: var(--space-l);
+}
+
+h4, .h4 {
+  font-size: var(--step-1);
+  line-height: var(--space-m);
+}
+
+p + p {
+  text-indent: 2ch;
+}
+
+article {
+    background-color: #334e40;
+    background-image: linear-gradient(180deg, rgba(51,78,69,0.5) 0%, rgba(51,78,64,0.85) 35%, rgba(51,78,64,0.85) 100%), url(/assets/images/pioneer-valley-topo.svg);
+    border-radius: 10px;
+    color: hsl(100, 100%, 100%);
 }

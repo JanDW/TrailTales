@@ -9,6 +9,8 @@ docTitle: TrailTales
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title @text="docTitle"></title>
     <link rel="stylesheet" href="../assets/styles/styles.css" />
+    <link rel="stylesheet" href="../assets/styles/type-scale.css" />
+    <link rel="stylesheet" href="../assets/styles/retrips-font.css" />
     <style @raw="getBundle('css')" webc:keep></style>
     <slot name="head"></slot>
   </head>
@@ -20,3 +22,7 @@ docTitle: TrailTales
     <script @raw="getBundle('js')" webc:keep type="module"></script>
   </body>
 </html>
+
+<style webc:scoped>
+  
+</style>

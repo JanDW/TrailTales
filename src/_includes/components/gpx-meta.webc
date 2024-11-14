@@ -20,13 +20,28 @@ I'm missing the point of this, how is webc:is useful if it can't be dynamically 
     `<${headinglevel}>${route.trkName}</${headinglevel}>`;
   </script>
 
-  <p>
-    <time :@value="route.startWaypoint.time" @format="d LLL yyyy"></time>
-    <time :@value="route.startWaypoint.time" @format="h:mm a"></time>
+  <div class="datetime">
+    <time :@value="route.startWaypoint.time" @format="LLLL d, yyyy"></time> · 
+    <time :@value="route.startWaypoint.time" @format="h:mm a"></time> → 
     <time :@value="route.endWaypoint.time" @format="h:mm a"></time>
-    <span @text="route.totalDistance + ` km`"></span> /
+  </div>
+  <div class="distance">
+    <span @text="route.totalDistance + ` km`"></span>
     <span
-      @text="parseFloat(route.totalDistance * 0.6213712).toFixed(2) + ` miles`"
+      @text="`(${parseFloat(route.totalDistance * 0.6213712).toFixed(2)}  miles)`"
     ></span>
-  </p>
+  </div>
+
 </header>
+
+<style webc:scoped>
+:host .datetime,
+:host .distance {
+  font-size: var(--step--2);
+  font-weight: 800;
+}
+
+:host .datetime {
+  margin-block-start: var(--space-xs);
+}
+</style>

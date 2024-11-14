@@ -7,6 +7,9 @@
 <style webc:scoped>
   :host {
     display: block;
+    padding: var(--space-s);
+    position: sticky; 
+    top: 20vw;
   }
 
   :host:not(:defined) > .map {
@@ -14,10 +17,9 @@
   }
 
   :host > .map {
-    border: 20px solid white;
     border-radius: 16px;
     box-shadow: var(--shadow-elevation-medium);
-    height: 100vh;
+    height: 60vh;
   }
 
   :host .photo-marker {
@@ -35,7 +37,9 @@
     text-decoration: underline;
   }
 
-  :host .leaflet-popup-close-button {display: none;}
+  :host .leaflet-popup-close-button {
+    display: none;
+  }
 </style>
 
 <script>
@@ -98,12 +102,17 @@
       markers.forEach((marker) => {
         const lat = marker.getAttribute('data-lat');
         const lon = marker.getAttribute('data-lon');
-        const id = marker.querySelector('h3').getAttribute('id');
-        const title = marker.querySelector('h3 > a').textContent;
+        // @TODO decouple from heading level
+        const id = marker.querySelector('h2').getAttribute('id');
+        // @TODO decouple from heading level
+        // childNodes[0] is the textnode and leaves out the binomial name
+        const title = marker.querySelector('h2 > a').childNodes[0].textContent;
         const caption = marker.querySelector('img').getAttribute('alt');
         L.marker([lat, lon], { icon: cameraIcon })
           .addTo(map)
-          .bindPopup(`<a href="#${id}" class="photo-marker">${title}<i>(${caption})</i></a>`);
+          .bindPopup(
+            `<a href="#${id}" class="photo-marker">${title}<i>(${caption})</i></a>`
+          );
       });
     }
   }

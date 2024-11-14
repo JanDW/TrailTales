@@ -6,9 +6,11 @@
 </div>
 
 <style webc:scoped>
-  :host {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+  @media (min-width: 48rem) {
+    :host {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+    }
   }
 
   :host > * {

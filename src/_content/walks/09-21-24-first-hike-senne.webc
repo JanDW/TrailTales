@@ -4,7 +4,6 @@ gpxFile: '09_21_24-first-hike-senne.gpx'
 sighting:
   - name: 'Amanita bisporigera'
     images: ['destroying-angel_10_27_24-1']
-
 photos:
   - src: '09-21-24-first-hike-senne - 1'
     alt: 'Birch polypore'
@@ -12,4 +11,6 @@ photos:
     alt: 'Destroying angel'
 ---
 
-Hello world.
+<template webc:type="11ty" 11ty:type="njk, md">
+Exciting day, Senne wanted to go on his first big hike. A repeat of Sofie's first big hike from two years ago. He did great, and we saw a lot of cool stuff. Including some stuff that could kill us, like the Destroying Angel mushroom, and oh, two black bears.
+</template>

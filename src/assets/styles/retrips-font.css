@@ -1,0 +1,8 @@
+@font-face {
+  font-family: 'retripsregular';
+  src:
+    url('/assets/fonts/retrips.woff2') format('woff2'),
+    url('/assets/fonts/retrips.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
