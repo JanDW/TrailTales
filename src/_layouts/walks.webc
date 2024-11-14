@@ -15,6 +15,7 @@ layout: layout
   <div slot="right"></div>
   <div slot="left" style="padding: var(--space-s);">
     <div style="margin-block-start: var(--space-3xl); margin-block-end: var(--space-m)">
+      <div class="category">Walks</div>
       <gpx-meta :@route="{{ gpxData }}" @headingLevel="h1"></gpx-meta>
     </div>
     <div @raw="content" webc:nokeep></div>
