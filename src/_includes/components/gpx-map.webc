@@ -2,8 +2,6 @@
 
 <div class="map" :id="uid"></div>
 
-<!--- @TODO These can't be bundled because they are copied over from node modules at build time, is there a workaround? --->
-
 <style webc:scoped>
   :host {
     display: block;

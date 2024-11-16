@@ -5,6 +5,9 @@ import { EleventyRenderPlugin } from '@11ty/eleventy';
 import EleventyFetch from '@11ty/eleventy-fetch';
 import yaml from 'js-yaml';
 import exifr from 'exifr';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 export default function (eleventyConfig) {
   const mdOptions = {
@@ -77,6 +80,49 @@ export default function (eleventyConfig) {
 
   // Transforms
   eleventyConfig.addTransform('prettier', prettier);
+
+  // JS Functions
+
+  // Fetch weather data
+  eleventyConfig.addJavaScriptFunction(
+    'getWeatherData',
+    async function (date, lat, lon) {
+      const dateIso8601 = new Date(date).toISOString().split('T')[0];
+
+      const weatherUrl = `https://archive-api.open-meteo.com/v1/archive?latitude=${lat}&longitude=${lon}&start_date=${dateIso8601}&end_date=${dateIso8601}&hourly=temperature_2m,relative_humidity_2m,dew_point_2m,weather_code&timezone=America%2FNew_York`;
+
+      // @TODO set duration to '*' once working
+      return EleventyFetch(weatherUrl, {
+        duration: '0s',
+        type: 'json',
+      });
+    }
+  );
+
+  // Get location name
+
+  eleventyConfig.addJavaScriptFunction(
+    'getLocationName',
+    async function (lat, lon) {
+      const WEATHER_API_KEY = process.env.WEATHER_API_KEY;
+
+      if (!WEATHER_API_KEY) {
+        throw new Error(
+          'WEATHER_API_KEY is not defined in environment variables'
+        );
+      }
+
+      // Get city or location name
+      const locationUrl = `http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=1&appid=${WEATHER_API_KEY}`;
+
+      console.log(locationJson[0]);
+
+      return EleventyFetch(locationUrl, {
+        duration: '*',
+        type: 'json',
+      });
+    }
+  );
 
   return {
     dir: {
