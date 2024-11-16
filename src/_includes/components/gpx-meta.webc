@@ -25,12 +25,16 @@ I'm missing the point of this, how is webc:is useful if it can't be dynamically 
     <time :@value="route.startWaypoint.time" @format="h:mm a"></time> → 
     <time :@value="route.endWaypoint.time" @format="h:mm a"></time>
   </div>
-  <weather-data :@date="route.startWaypoint.time" :@lat="route.startWaypoint.lat" :@lon="route.startWaypoint.lon"></weather-data>
+  <!--- <weather-data :@date="route.startWaypoint.time" :@lat="route.startWaypoint.lat" :@lon="route.startWaypoint.lon"></weather-data> --->
+
   <div class="distance">
-    <span @text="route.totalDistance + ` km`"></span>
+    <span @text="route.totalDistance + ` km`" webc:nokeep></span>
     <span
       @text="`(${parseFloat(route.totalDistance * 0.6213712).toFixed(2)}  miles)`"
+      webc:nokeep
     ></span>
+    <span @text="` · `" webc:nokeep></span>
+    <span @text="$data.locationName" webc:nokeep></span>
   </div>
 
 </header>

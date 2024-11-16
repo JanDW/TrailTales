@@ -29,5 +29,15 @@ export default (data) => ({
         return photo;
       });
     },
+    locationName: async function (data) {
+      const gpxData = await data.eleventyComputed.gpxData(data);
+      if (!gpxData?.startWaypoint) return;
+      const location = await this.getLocation(
+        gpxData.startWaypoint.lat,
+        gpxData.startWaypoint.lon,
+        gpxData.startWaypoint.time
+      );
+      return location[0].name || '';
+    },
   },
 });

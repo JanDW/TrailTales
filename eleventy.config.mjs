@@ -83,7 +83,7 @@ export default function (eleventyConfig) {
 
   // JS Functions
 
-  // Fetch weather data
+  // Get weather data
   eleventyConfig.addJavaScriptFunction(
     'getWeatherData',
     async function (date, lat, lon) {
@@ -100,9 +100,8 @@ export default function (eleventyConfig) {
   );
 
   // Get location name
-
   eleventyConfig.addJavaScriptFunction(
-    'getLocationName',
+    'getLocation',
     async function (lat, lon) {
       const WEATHER_API_KEY = process.env.WEATHER_API_KEY;
 
@@ -112,10 +111,7 @@ export default function (eleventyConfig) {
         );
       }
 
-      // Get city or location name
       const locationUrl = `http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=1&appid=${WEATHER_API_KEY}`;
-
-      console.log(locationJson[0]);
 
       return EleventyFetch(locationUrl, {
         duration: '*',
