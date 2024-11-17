@@ -30,11 +30,11 @@ const wmoWeatherCodes = {
   80: '🌧️ Rain showers: Slight intensity',
   81: '🌧️ Rain showers: Moderate intensity',
   82: '🌧️ Rain showers: Violent intensity',
-  85: '☃️Snow showers: Slight intensity',
+  85: '☃️ Snow showers: Slight intensity',
   86: '☃️ Snow showers: Heavy intensity',
   95: '⚡️ Thunderstorm: Slight or moderate',
   96: '⛈️ Thunderstorm with slight hail',
-  99: '⛈️Thunderstorm with heavy hail',
+  99: '⛈️ Thunderstorm with heavy hail',
 };
 
 export default (data) => ({
@@ -81,6 +81,10 @@ export default (data) => ({
         gpxData.startWaypoint.lon
       );
 
+      if (!weatherData || !weatherData.hourly) {
+        throw new Error('Invalid weather data');
+      }
+
       // take time from the gpxData.startWaypoint.time and use it to figure out which element in the hourly array to pick
 
       const date = new Date(gpxData.startWaypoint.time);
@@ -89,19 +93,66 @@ export default (data) => ({
 
       // if minutes are less than 30, pick the hour, otherwise pick the next hour
       let indexToPick;
-      minutes < 30 ? indexToPick = hour : indexToPick = hour + 1;
+      minutes < 30 ? (indexToPick = hour) : (indexToPick = hour + 1);
 
+      // get the weather code for weather description
       const weatherCode = weatherData.hourly.weather_code[indexToPick];
-      
-      // get the weather description from the weather codes object
+
+      // weather description
       const description = wmoWeatherCodes[weatherCode];
+
+      // temperature
       const temp = weatherData.hourly.temperature_2m[indexToPick];
       const tempUnit = weatherData.hourly_units.temperature_2m;
+
+      // humidity
       const humidity = weatherData.hourly.relative_humidity_2m[indexToPick];
       const humidityUnit = weatherData.hourly_units.relative_humidity_2m;
+
+      // dew point
       const dewPoint = weatherData.hourly.dew_point_2m[indexToPick];
       const dewPointUnit = weatherData.hourly_units.dew_point_2m;
 
+      // precipitation
+      const precipitation = weatherData.hourly.precipitation[indexToPick];
+      const precipitationUnit = weatherData.hourly_units.precipitation;
+
+      // visibility · can be null
+      const visibility = weatherData.hourly.visibility[indexToPick];
+      const visibilityUnit = 'm';
+
+      // wind speed
+      const windSpeed = weatherData.hourly.wind_speed_10m[indexToPick];
+      const windSpeedUnit = weatherData.hourly_units.wind_speed_10m;
+
+      // wind direction
+      const windDirection = weatherData.hourly.wind_direction_10m[indexToPick];
+      const windDirectionUnit = weatherData.hourly_units.wind_direction_10m;
+
+      // wind gusts
+      const windGusts = weatherData.hourly.wind_gusts_10m[indexToPick];
+      const windGustsUnit = weatherData.hourly_units.wind_gusts_10m;
+
+      // soil temperature
+      const soilTemperatureLevels = {
+        '0cm': weatherData.hourly.soil_temperature_0cm[indexToPick],
+        '6cm': weatherData.hourly.soil_temperature_6cm[indexToPick],
+        '18cm': weatherData.hourly.soil_temperature_18cm[indexToPick],
+        '54cm': weatherData.hourly.soil_temperature_54cm[indexToPick],
+        unit: tempUnit,
+      }
+
+      // soil moisture
+      const soilMoistureLevels = {
+        '0to1cm': weatherData.hourly.soil_moisture_0_to_1cm[indexToPick],
+        '1to3cm': weatherData.hourly.soil_moisture_1_to_3cm[indexToPick],
+        '3to9cm': weatherData.hourly.soil_moisture_3_to_9cm[indexToPick],
+        '9to27cm': weatherData.hourly.soil_moisture_9_to_27cm[indexToPick],
+        '27to81cm': weatherData.hourly.soil_moisture_27_to_81cm[indexToPick],
+        unit: 'm³/m³',
+      }
+
+      // Check for null values and undefined for units when rendering in templates
       return {
         description,
         temp,
@@ -110,7 +161,19 @@ export default (data) => ({
         humidityUnit,
         dewPoint,
         dewPointUnit,
+        precipitation,
+        precipitationUnit,
+        visibility,
+        visibilityUnit,
+        windSpeed,
+        windSpeedUnit,
+        windDirection,
+        windDirectionUnit,
+        windGusts,
+        windGustsUnit,
+        soilTemperatureLevels,
+        soilMoistureLevels,
       };
-    }
+    },
   },
 });

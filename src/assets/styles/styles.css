@@ -126,7 +126,7 @@ article {
 .category {
   font-size: var(--step--2);
   font-weight: 500;
-  letter-spacing: .1em;
+  letter-spacing: .2em;
   margin-block-end: var(--space-s);
   text-transform: uppercase;
 }
