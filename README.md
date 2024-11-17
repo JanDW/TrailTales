@@ -12,8 +12,10 @@ An app for logging sightings (myco, fauna, flora) during walks
 
 ## @TODO
 
-- Static map API tiles cached with eleventy fetch
-- roll up leaflet css and js in asset bundle
+- Break up components in smaller, more reusable components
+- Look into creating components for the weather and location API calls, so they're usable in whatever context, a limitation of the current data cascade approach
+- [ ]Static map API tiles cached with eleventy fetch
+- [X] roll up leaflet css and js in asset bundle
 
 ## Colofon
 
