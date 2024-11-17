@@ -21,32 +21,50 @@ I'm missing the point of this, how is webc:is useful if it can't be dynamically 
   </script>
 
   <div class="datetime">
-    <time :@value="route.startWaypoint.time" @format="LLLL d, yyyy"></time> · 
-    <time :@value="route.startWaypoint.time" @format="h:mm a"></time> → 
+    <time :@value="route.startWaypoint.time" @format="LLLL d, yyyy"></time> ·
+    <time :@value="route.startWaypoint.time" @format="h:mm a"></time> →
     <time :@value="route.endWaypoint.time" @format="h:mm a"></time>
   </div>
   <!--- <weather-data :@date="route.startWaypoint.time" :@lat="route.startWaypoint.lat" :@lon="route.startWaypoint.lon"></weather-data> --->
 
   <div class="distance">
+    <span @text="$data.locationName" webc:nokeep></span>
+    <span @text="` · `" webc:nokeep></span>
     <span @text="route.totalDistance + ` km`" webc:nokeep></span>
     <span
       @text="`(${parseFloat(route.totalDistance * 0.6213712).toFixed(2)}  miles)`"
       webc:nokeep
     ></span>
-    <span @text="` · `" webc:nokeep></span>
-    <span @text="$data.locationName" webc:nokeep></span>
   </div>
 
+  <div class="meta-weather">
+    <span @text="`${$data.weather.description}, `" webc:nokeep></span>
+    <span
+      @text="`${$data.weather.temp}${$data.weather.tempUnit}`"
+      webc:nokeep
+    ></span>
+    <div>
+      <span
+        @text="`RH: ${$data.weather.humidity}${$data.weather.humidityUnit}, `"
+        webc:nokeep
+      ></span>
+      <span
+        @text="`DP: ${$data.weather.dewPoint}${$data.weather.dewPointUnit}`"
+        webc:nokeep
+      ></span>
+    </div>
+  </div>
 </header>
 
 <style webc:scoped>
-:host .datetime,
-:host .distance {
-  font-size: var(--step--2);
-  font-weight: 800;
-}
+  :host .datetime,
+  :host .distance,
+  :host .meta-weather {
+    font-size: var(--step--2);
+    font-weight: 800;
+  }
 
-:host .datetime {
-  margin-block-start: var(--space-xs);
-}
+  :host .datetime {
+    margin-block-start: var(--space-xs);
+  }
 </style>

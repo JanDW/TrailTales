@@ -89,11 +89,11 @@ export default function (eleventyConfig) {
     async function (date, lat, lon) {
       const dateIso8601 = new Date(date).toISOString().split('T')[0];
 
+      // https://open-meteo.com/en/docs/historical-weather-api
       const weatherUrl = `https://archive-api.open-meteo.com/v1/archive?latitude=${lat}&longitude=${lon}&start_date=${dateIso8601}&end_date=${dateIso8601}&hourly=temperature_2m,relative_humidity_2m,dew_point_2m,weather_code&timezone=America%2FNew_York`;
 
-      // @TODO set duration to '*' once working
       return EleventyFetch(weatherUrl, {
-        duration: '0s',
+        duration: '*',
         type: 'json',
       });
     }
