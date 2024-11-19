@@ -39,6 +39,7 @@ const wmoWeatherCodes = {
 
 export default (data) => ({
   layout: 'walks.webc',
+  tag: 'walks',
   eleventyComputed: {
     permalink: (data) => getPermalink(data),
     gpxData: (data) => {
@@ -48,6 +49,8 @@ export default (data) => ({
       return gpxMatch;
     },
     shots: (data) => {
+      //@WIP - This is a work in progress
+      if (!data.photos || data.photos.length === 0) return;
       data.photos.map((photo) => {
         if (photo) {
           photo.title = data.images[photo.src]?.exif.ObjectName;
@@ -68,7 +71,6 @@ export default (data) => ({
         gpxData.startWaypoint.lon
       );
 
-      // console.log({ location });
       // Returns either 'City, State' or 'City, Country'
       return `${location[0].name}, ${location[0].state}` || '';
     },
@@ -88,69 +90,73 @@ export default (data) => ({
       // take time from the gpxData.startWaypoint.time and use it to figure out which element in the hourly array to pick
 
       const date = new Date(gpxData.startWaypoint.time);
-      const hour = date.getHours(); // 0 - 23
-      const minutes = date.getMinutes(); // 0 - 59
 
-      // if minutes are less than 30, pick the hour, otherwise pick the next hour
-      let indexToPick;
-      minutes < 30 ? (indexToPick = hour) : (indexToPick = hour + 1);
+      // Floor date to nearest hour
+      // Round the date to the nearest hour
+      date.setMinutes(0, 0, 0);
+      const nearestHour = new Date(date);
+
+      // Find the index of the nearest hour
+      const timeIndex = weatherData.hourly.time.indexOf(
+        nearestHour.toISOString().slice(0, -8)
+      );
 
       // get the weather code for weather description
-      const weatherCode = weatherData.hourly.weather_code[indexToPick];
+      const weatherCode = weatherData.hourly.weather_code[timeIndex];
 
       // weather description
       const description = wmoWeatherCodes[weatherCode];
 
       // temperature
-      const temp = weatherData.hourly.temperature_2m[indexToPick];
+      const temp = weatherData.hourly.temperature_2m[timeIndex];
       const tempUnit = weatherData.hourly_units.temperature_2m;
 
       // humidity
-      const humidity = weatherData.hourly.relative_humidity_2m[indexToPick];
+      const humidity = weatherData.hourly.relative_humidity_2m[timeIndex];
       const humidityUnit = weatherData.hourly_units.relative_humidity_2m;
 
       // dew point
-      const dewPoint = weatherData.hourly.dew_point_2m[indexToPick];
+      const dewPoint = weatherData.hourly.dew_point_2m[timeIndex];
       const dewPointUnit = weatherData.hourly_units.dew_point_2m;
 
       // precipitation
-      const precipitation = weatherData.hourly.precipitation[indexToPick];
+      const precipitation = weatherData.hourly.precipitation[timeIndex];
       const precipitationUnit = weatherData.hourly_units.precipitation;
 
       // visibility · can be null
-      const visibility = weatherData.hourly.visibility[indexToPick];
+      const visibility = weatherData.hourly.visibility[timeIndex];
       const visibilityUnit = 'm';
 
       // wind speed
-      const windSpeed = weatherData.hourly.wind_speed_10m[indexToPick];
+      const windSpeed = weatherData.hourly.wind_speed_10m[timeIndex];
       const windSpeedUnit = weatherData.hourly_units.wind_speed_10m;
 
       // wind direction
-      const windDirection = weatherData.hourly.wind_direction_10m[indexToPick];
+      const windDirection = weatherData.hourly.wind_direction_10m[timeIndex];
       const windDirectionUnit = weatherData.hourly_units.wind_direction_10m;
 
       // wind gusts
-      const windGusts = weatherData.hourly.wind_gusts_10m[indexToPick];
+      const windGusts = weatherData.hourly.wind_gusts_10m[timeIndex];
       const windGustsUnit = weatherData.hourly_units.wind_gusts_10m;
 
       // soil temperature
       const soilTemperatureLevels = {
-        '0cm': weatherData.hourly.soil_temperature_0cm[indexToPick],
-        '6cm': weatherData.hourly.soil_temperature_6cm[indexToPick],
-        '18cm': weatherData.hourly.soil_temperature_18cm[indexToPick],
-        '54cm': weatherData.hourly.soil_temperature_54cm[indexToPick],
+        '0cm': weatherData.hourly.soil_temperature_0cm[timeIndex],
+        '6cm': weatherData.hourly.soil_temperature_6cm[timeIndex],
+        '18cm': weatherData.hourly.soil_temperature_18cm[timeIndex],
+        '54cm': weatherData.hourly.soil_temperature_54cm[timeIndex],
         unit: tempUnit,
-      }
+      };
 
       // soil moisture
       const soilMoistureLevels = {
-        '0to1cm': weatherData.hourly.soil_moisture_0_to_1cm[indexToPick],
-        '1to3cm': weatherData.hourly.soil_moisture_1_to_3cm[indexToPick],
-        '3to9cm': weatherData.hourly.soil_moisture_3_to_9cm[indexToPick],
-        '9to27cm': weatherData.hourly.soil_moisture_9_to_27cm[indexToPick],
-        '27to81cm': weatherData.hourly.soil_moisture_27_to_81cm[indexToPick],
+        '0to1cm': weatherData.hourly.soil_moisture_0_to_1cm[timeIndex],
+        '1to3cm': weatherData.hourly.soil_moisture_1_to_3cm[timeIndex],
+        '3to9cm': weatherData.hourly.soil_moisture_3_to_9cm[timeIndex],
+        '9to27cm': weatherData.hourly.soil_moisture_9_to_27cm[timeIndex],
+        '27to81cm': weatherData.hourly.soil_moisture_27_to_81cm[timeIndex],
         unit: 'm³/m³',
-      }
+      };
 
       // Check for null values and undefined for units when rendering in templates
       return {

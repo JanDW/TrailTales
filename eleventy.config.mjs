@@ -87,10 +87,20 @@ export default function (eleventyConfig) {
   eleventyConfig.addJavaScriptFunction(
     'getWeatherData',
     async function (date, lat, lon) {
+      const currentDate = new Date();
       const dateIso8601 = new Date(date).toISOString().split('T')[0];
 
-      // https://open-meteo.com/en/docs/historical-weather-api
-      const weatherUrl = `https://archive-api.open-meteo.com/v1/archive?latitude=${lat}&longitude=${lon}&start_date=${dateIso8601}&end_date=${dateIso8601}&hourly=temperature_2m,relative_humidity_2m,dew_point_2m,precipitation,weather_code,visibility,wind_speed_10m,wind_direction_10m,wind_gusts_10m,soil_temperature_0cm,soil_temperature_6cm,soil_temperature_18cm,soil_temperature_54cm,soil_moisture_0_to_1cm,soil_moisture_1_to_3cm,soil_moisture_3_to_9cm,soil_moisture_9_to_27cm,soil_moisture_27_to_81cm&timezone=America%2FNew_York`;
+      // find out how many days ago the date is
+      const diffUnixTime = Math.abs(currentDate - new Date(date));
+      const daysAgo = Math.floor(diffUnixTime / (1000 * 60 * 60 * 24));
+
+      // API request for dates over 3 days ago
+      const historyUrl = `https://archive-api.open-meteo.com/v1/archive?latitude=${lat}&longitude=${lon}&start_date=${dateIso8601}&end_date=${dateIso8601}&hourly=temperature_2m,relative_humidity_2m,dew_point_2m,precipitation,weather_code,visibility,wind_speed_10m,wind_direction_10m,wind_gusts_10m,soil_temperature_0cm,soil_temperature_6cm,soil_temperature_18cm,soil_temperature_54cm,soil_moisture_0_to_1cm,soil_moisture_1_to_3cm,soil_moisture_3_to_9cm,soil_moisture_9_to_27cm,soil_moisture_27_to_81cm&timezone=America%2FNew_York`;
+
+      // URL for date in last 3 days
+      const forecastUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,relative_humidity_2m,dew_point_2m,precipitation,weather_code,visibility,wind_speed_10m,wind_direction_10m,wind_gusts_10m,soil_temperature_0cm,soil_temperature_6cm,soil_temperature_18cm,soil_temperature_54cm,soil_moisture_0_to_1cm,soil_moisture_1_to_3cm,soil_moisture_3_to_9cm,soil_moisture_9_to_27cm,soil_moisture_27_to_81cm&past_days=${daysAgo}&timezone=auto`;
+
+      let weatherUrl = daysAgo > 3 ? historyUrl : forecastUrl;
 
       return EleventyFetch(weatherUrl, {
         duration: '*',
