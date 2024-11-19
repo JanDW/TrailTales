@@ -1,0 +1,18 @@
+---
+gpxFile: '11-7-24-buffam-falls-with-feinstein-family.gpx'
+photos:
+- src: '11-17-24-buffam-falls - 1'
+  iNatTaxa: 
+- src: '11-17-24-buffam-falls - 2'
+  iNatTaxa: 61786
+- src: '11-17-24-buffam-falls - 3'
+  iNatTaxa: 125684
+- src: '11-17-24-buffam-falls - 4'
+  iNatTaxa: 125684
+- src: '11-17-24-buffam-falls - 5'
+  iNatTaxa: 125684
+- src: '11-17-24-buffam-falls - 6'
+  iNatTaxa:
+---
+
+<template webc:type="11ty" 11ty:type="njk, md"></template>
