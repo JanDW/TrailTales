@@ -37,6 +37,8 @@ I'm missing the point of this, how is webc:is useful if it can't be dynamically 
     ></span>
   </div>
 
+  <!--- <script webc:type="setup"></script> --->
+
   <div class="meta-weather">
     <span @text="`${$data.weather.description}, `" webc:nokeep></span>
     <span
@@ -45,11 +47,11 @@ I'm missing the point of this, how is webc:is useful if it can't be dynamically 
     ></span>
     <div>
       <span
-        @text="`RH: ${$data.weather.humidity}${$data.weather.humidityUnit}, `"
+        @text="`RH ${$data.weather.humidity}${$data.weather.humidityUnit}, `"
         webc:nokeep
       ></span>
       <span
-        @text="`DP: ${$data.weather.dewPoint}${$data.weather.dewPointUnit}`"
+        @text="`DP ${$data.weather.dewPoint}${$data.weather.dewPointUnit}`"
         webc:nokeep
       ></span>
     </div>
