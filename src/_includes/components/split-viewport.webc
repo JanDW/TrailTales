@@ -1,3 +1,6 @@
+<!---  @TODO supply left/right grid-template column values that get combined in the css, if left out, the values should be set to 1fr 1fr   --->
+
+
 <div class="left-side">
   <slot name="left"></slot>
 </div>

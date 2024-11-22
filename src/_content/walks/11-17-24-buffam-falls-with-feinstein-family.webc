@@ -3,6 +3,7 @@ gpxFile: '11-7-24-buffam-falls-with-feinstein-family.gpx'
 photos:
 - src: '11-17-24-buffam-falls - 1'
   iNatTaxa: 
+  caption: ''
 - src: '11-17-24-buffam-falls - 2'
   iNatTaxa: 61786
 - src: '11-17-24-buffam-falls - 3'
@@ -15,4 +16,11 @@ photos:
   iNatTaxa:
 ---
 
-<template webc:type="11ty" 11ty:type="njk, md"></template>
+<template webc:type="11ty" 11ty:type="njk, md">
+  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia debitis alias rem veritatis et ipsam vero quod voluptatum suscipit sunt. Deserunt, sint. Rem facilis recusandae atque nemo velit, reprehenderit laudantium?
+  Sit iure dolorem vero impedit distinctio iste fuga ullam molestias corrupti. Dicta fugiat, assumenda eveniet quibusdam nemo ipsam et repudiandae! Ex, ducimus perspiciatis. Eaque, doloremque. Quibusdam provident a veritatis rerum.
+
+  Possimus officia sint odio cupiditate quo quasi eaque delectus perferendis harum fuga tempore nobis, ex reprehenderit minus et deleniti soluta voluptate libero ipsum hic omnis corporis? Quam nulla labore ex.
+
+  Dolore velit accusantium assumenda quo ut autem eos in quia laudantium natus nihil tempora libero deleniti magni, pariatur nobis temporibus quibusdam nemo est molestiae rem dignissimos sint labore. Dolorum, blanditiis?
+</template>

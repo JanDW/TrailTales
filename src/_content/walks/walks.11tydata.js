@@ -39,7 +39,7 @@ const wmoWeatherCodes = {
 
 export default (data) => ({
   layout: 'walks.webc',
-  tag: 'walks',
+  tags: 'walks',
   eleventyComputed: {
     permalink: (data) => getPermalink(data),
     gpxData: (data) => {
@@ -49,7 +49,6 @@ export default (data) => ({
       return gpxMatch;
     },
     shots: (data) => {
-      //@WIP - This is a work in progress
       if (!data.photos || data.photos.length === 0) return;
       data.photos.map((photo) => {
         if (photo) {

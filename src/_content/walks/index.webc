@@ -1,10 +1,8 @@
 ---
 layout: layout.webc
 docTitle: Walks · TrailTales
-photos:
-  - src: '09-21-24-first-hike-senne - 1'
-  - src: '09-21-24-first-hike-senne - 2'
 title: Walks listing
+eleventyExcludeFromCollections: true
 ---
 
 <h1 @text="title"></h1>
@@ -19,49 +17,27 @@ title: Walks listing
   ></time>
 </p>
 
-<!-- <span @raw="console.log($data.gpx)"></span> -->
-<article webc:for="route of $data.gpx">
-  <!--- <span @text="console.log(route)"></span> --->
+<article webc:for="walk of $data.collections.walks">
   <h2>
-    <span @text="route.trkName"></span>
+    <a :href="walk.page.url"><span @text="walk.data.gpxData?.trkName"></span></a>
   </h2>
   <p>
-    <time :@value="route.startWaypoint.time" @format="d LLL yyyy"></time>
-    <time :@value="route.startWaypoint.time" @format="h:mm a"></time>
-    <time :@value="route.endWaypoint.time" @format="h:mm a"></time>
-    <span @text="route.totalDistance + ` km`"></span> /
+    <time :@value="walk.data.gpxData?.startWaypoint.time" @format="d LLL yyyy"></time>
+    <time :@value="walk.data.gpxData?.startWaypoint.time" @format="h:mm a"></time>
+    <time :@value="walk.data.gpxData?.endWaypoint.time" @format="h:mm a"></time>
+    <span @text="walk.data.gpxData?.totalDistance + ` km`"></span> /
     <span
-      @text="parseFloat(route.totalDistance * 0.6213712).toFixed(2) + ` miles`"
+      @text="parseFloat(walk.data.gpxData?.totalDistance * 0.6213712).toFixed(2) + ` miles`"
     ></span>
   </p>
   <gpx-map
-    :file="route.fileName"
-    :startLat="route.startWaypoint.lat"
-    :startLong="route.startWaypoint.lon"
+    :file="walk.data.gpxData?.fileName"
+    :startLat="walk.data.gpxData?.startWaypoint.lat"
+    :startLong="walk.data.gpxData?.startWaypoint.lon"
   >
   </gpx-map>
 </article>
-<div webc:for="photo of photos">
-  <div @raw="images[photo.src].exif.title.value"></div>
-  <div @raw="images[photo.src].exif.Keywords"></div>
-  <div @raw="images[photo.src].exif.longitude"></div>
-  <div @raw="images[photo.src].exif.latitude"></div>
-  <div @raw="images[photo.src].exif.Caption"></div>
-  <time
-    :@value="images[photo.src].exif.DateTimeOriginal"
-    @format="d LLL yyyy"
-  ></time>
-  at
-  <time
-    :@value="images[photo.src].exif.DateTimeOriginal"
-    @format="h:mm a"
-  ></time>
 
-  <div @raw="images[photo.src].exif.LensModel"></div>
-
-  <!--- <div @raw="console.log(images[photo.src].exif)"></div> --->
-
-  <img :src="(`/assets/images/${photo.src}.jpeg`)" :alt="photo.caption" />
   <leaflet-includes webc:nokeep></leaflet-includes>
 </div>
 

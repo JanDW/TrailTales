@@ -129,3 +129,11 @@ article {
   margin-block-end: var(--space-s);
   text-transform: uppercase;
 }
+
+.category > a {
+  text-decoration: none;
+}
+
+.category > a:hover {
+  text-decoration: underline;
+}
