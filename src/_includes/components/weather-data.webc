@@ -1,0 +1,39 @@
+<div class="meta-weather">
+  <span
+    webc:if="$data.weather.description"
+    @text="`${$data.weather.description}`"
+    webc:nokeep
+  ></span>
+  <span
+    webc:if="$data.weather.description && $data.weather.temp"
+    @text="`, `"
+  ></span>
+  <span
+    webc:if="$data.weather.temp"
+    @text="`${$data.weather.temp}${$data.weather.tempUnit}`"
+    webc:nokeep
+  ></span>
+  <div>
+    <span
+      webc:if="$data.weather.humidity"
+      @text="`RH ${$data.weather.humidity}${$data.weather.humidityUnit}`"
+      webc:nokeep
+    ></span>
+    <span
+      webc:if="$data.weather.humidity && $data.weather.dewPoint"
+      @text="`, `"
+    ></span>
+    <span
+      webc:if="$data.weather.dewPoint"
+      @text="`DP ${$data.weather.dewPoint}${$data.weather.dewPointUnit}`"
+      webc:nokeep
+    ></span>
+  </div>
+</div>
+
+<style webc:scoped>
+  :host .meta-weather {
+    font-size: var(--step--2);
+    font-weight: 800;
+  }
+</style>

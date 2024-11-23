@@ -37,31 +37,12 @@ I'm missing the point of this, how is webc:is useful if it can't be dynamically 
     ></span>
   </div>
 
-  <!--- <script webc:type="setup"></script> --->
-
-  <div class="meta-weather">
-    <span @text="`${$data.weather.description}, `" webc:nokeep></span>
-    <span
-      @text="`${$data.weather.temp}${$data.weather.tempUnit}`"
-      webc:nokeep
-    ></span>
-    <div>
-      <span
-        @text="`RH ${$data.weather.humidity}${$data.weather.humidityUnit}, `"
-        webc:nokeep
-      ></span>
-      <span
-        @text="`DP ${$data.weather.dewPoint}${$data.weather.dewPointUnit}`"
-        webc:nokeep
-      ></span>
-    </div>
-  </div>
+  <weather-data></weather-data>
 </header>
 
 <style webc:scoped>
   :host .datetime,
-  :host .distance,
-  :host .meta-weather {
+  :host .distance {
     font-size: var(--step--2);
     font-weight: 800;
   }

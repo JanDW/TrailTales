@@ -1,7 +1,13 @@
-<!---  @TODO supply left/right grid-template column values that get combined in the css, if left out, the values should be set to 1fr 1fr   --->
+<!---  @TODO supply left/right grid-template column values that get combined in the css, if left out, the values should be set to 1fr 1fr
+
+webc:type="css:scoped"
+
+https://www.11ty.dev/docs/languages/webc/#using-javascript-to-generate-content
+
+---> 
 
 
-<div class="left-side">
+<div class="left-side"> 
   <slot name="left"></slot>
 </div>
 <div class="right-side">
