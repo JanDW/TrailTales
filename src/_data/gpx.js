@@ -12,16 +12,10 @@ function removeExtensions(gpxDoc) {
 }
 
 function removeWaypoints(gpxDoc) {
-  let removedElementCount = 0;
-  // Convert to a static array to avoid issues with live collections
-  const waypoints = Array.from(gpxDoc.getElementsByTagName('wpt'));
-  waypoints.forEach((waypoint, index) => {
-    // Remove all waypoints except the start and end
-    if (index !== 0 && index !== waypoints.length - 1) {
-      waypoint.parentNode.removeChild(waypoint);
-      removedElementCount++;
-    }
-  });
+  let waypoint;
+  while ((waypoint = gpxDoc.getElementsByTagName('wpt')[0])) {
+    waypoint.parentNode.removeChild(waypoint);
+  }
 }
 
 // Haversine formula to calculate distance between two points
@@ -65,10 +59,18 @@ export default function () {
         throw new Error(`Failed to parse GPX file: ${gpxFile}`);
       }
 
-      // Extract the start and end waypoints
-      const waypoints = gpxDoc.getElementsByTagName('wpt');
-      const startWaypoint = waypoints[0];
-      const endWaypoint = waypoints[waypoints.length - 1];
+      // Inside the first tracksegment, the first and last waypoints
+      const trkseg = gpxDoc.getElementsByTagName('trkseg')[0];
+      if (!trkseg) {
+        throw new Error(`No track segments found in GPX file: ${gpxFile}`);
+      }
+
+      const startWaypoint = trkseg.getElementsByTagName('trkpt')[0];
+
+      const endWaypoint = trkseg.getElementsByTagName('trkpt')[
+        trkseg.getElementsByTagName('trkpt').length - 1
+      ];
+
 
       // Extract the name of the track
       const trkElement = gpxDoc.getElementsByTagName('trk')[0];
@@ -108,7 +110,6 @@ export default function () {
         trkName,
         totalDistance: totalDistance.toFixed(2),
         startWaypoint: {
-          name: startWaypoint.getElementsByTagName('name')[0]?.textContent,
           lat: startWaypoint.getAttribute('lat'),
           lon: startWaypoint.getAttribute('lon'),
           ele: startWaypoint.getElementsByTagName('ele')[0]?.textContent,
