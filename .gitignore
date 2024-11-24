@@ -129,6 +129,8 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-www/
-
 .DS_Store
+
+# Eleventy
+www/
+src/_data/images
