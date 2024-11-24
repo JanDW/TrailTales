@@ -44,7 +44,7 @@ export default (data) => ({
     permalink: (data) => getPermalink(data),
     gpxData: (data) => {
       const gpxMatch = data.gpx.filter(
-        (gpxItem) => gpxItem.fileName === data.gpxFile
+        (gpxItem) => gpxItem.fileName === data.gpxFile + '.gpx'
       )[0];
       return gpxMatch;
     },

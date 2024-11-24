@@ -45,7 +45,7 @@
     connectedCallback() {
       // Get the WebC uid of the map element
       const uid = this.querySelector('.map').getAttribute('id');
-      const gpxFile = '/assets/files/gpx/' + this.getAttribute('file');
+      const gpxFile = '/assets/files/gpx/' + this.getAttribute('file') + '.gpx';
 
       const startLat = parseFloat(this.getAttribute('startLat'));
       const startLong = parseFloat(this.getAttribute('startLong'));
