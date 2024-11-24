@@ -11,7 +11,7 @@ layout: layout
 <leaflet-includes webc:nokeep></leaflet-includes>
 <article>
 
- <split-viewport>
+ <split-viewport style="--left: 2fr">
   <div slot="right"></div>
   <div slot="left" style="padding: var(--space-s);">
     <div style="margin-block-start: var(--space-3xl); margin-block-end: var(--space-m)">
@@ -23,7 +23,7 @@ layout: layout
 
  </split-viewport>
 
-<split-viewport>
+<split-viewport style="--left: 2fr">
   <div slot="right" webc:nokeep>
     <gpx-map
       :file="{{ gpxFile }}"

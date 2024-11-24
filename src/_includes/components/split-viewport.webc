@@ -1,28 +1,22 @@
-<!---  @TODO supply left/right grid-template column values that get combined in the css, if left out, the values should be set to 1fr 1fr
-
-webc:type="css:scoped"
-
-https://www.11ty.dev/docs/languages/webc/#using-javascript-to-generate-content
-
----> 
-
-
-<div class="left-side"> 
+<div class="left-side">
   <slot name="left"></slot>
 </div>
 <div class="right-side">
   <slot name="right"></slot>
 </div>
 
-<style webc:scoped>
-  @media (min-width: 48rem) {
+<script webc:scoped webc:is="style" webc:type="js">
+let bp = breakpoint || '48rem';
+
+`@media (min-width: ${bp}) {
     :host {
       display: grid;
-      grid-template-columns: 2fr 1fr;
+      grid-template-columns: var(--left, 1fr) var(--right, 1fr);
     }
   }
 
   :host > * {
     isolation: isolate;
   }
-</style>
+  `
+</script>
