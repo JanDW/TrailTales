@@ -2,10 +2,18 @@
 title: 'First Hike Senne'
 gpxFile: '09-21-24-poverty-mountain'
 photos:
-  - src: '09-21-24-first-hike-senne - 1'
-    alt: 'Birch polypore'
-  - src: '09-21-24-first-hike-senne - 2'
-    alt: 'Destroying angel'
+  - src: '09-21-24-mount-poverty - 1'
+  - src: '09-21-24-mount-poverty - 2'
+  - src: '09-21-24-mount-poverty - 3'
+  - src: '09-21-24-mount-poverty - 4'
+  - src: '09-21-24-mount-poverty - 5'
+  - src: '09-21-24-mount-poverty - 6'
+  - src: '09-21-24-mount-poverty - 7'
+  - src: '09-21-24-mount-poverty - 8'
+  - src: '09-21-24-mount-poverty - 9'
+  - src: '09-21-24-mount-poverty - 10'
+  - src: '09-21-24-mount-poverty - 11'
+  - src: '09-21-24-mount-poverty - 12'
 ---
 
 <template webc:type="11ty" 11ty:type="njk, md">
