@@ -55,7 +55,8 @@
 
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        attribution:
+          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       }).addTo(map);
 
       L.control.scale().addTo(map);
@@ -96,11 +97,9 @@
       markers.forEach((marker) => {
         const lat = marker.getAttribute('data-lat');
         const lon = marker.getAttribute('data-lon');
-        // @TODO decouple from heading level
+        if (!lat || !lon) return;
         const id = marker.querySelector('h2').getAttribute('id');
-        // @TODO decouple from heading level
-        // childNodes[0] is the textnode and leaves out the binomial name
-        const title = marker.querySelector('h2 > a').childNodes[0].textContent;
+        const title = marker.querySelector('[data-title]').textContent;
         const caption = marker.querySelector('img').getAttribute('alt');
         L.marker([lat, lon], { icon: cameraIcon })
           .addTo(map)

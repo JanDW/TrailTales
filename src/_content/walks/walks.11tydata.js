@@ -52,8 +52,8 @@ export default (data) => ({
       if (!data.photos || data.photos.length === 0) return;
       data.photos.map((photo) => {
         if (photo) {
-          photo.title = data.images[photo.src]?.exif.ObjectName;
-          photo.caption = data.images[photo.src]?.exif.Caption;
+          photo.title = data.images[photo.src]?.exif.ObjectName || 'Unidentified species';
+          photo.caption = data.images[photo.src]?.exif.Caption || '';
           photo.lat = data.images[photo.src]?.exif.latitude;
           photo.lon = data.images[photo.src]?.exif.longitude;
           photo.dateTime = data.images[photo.src]?.exif.DateTimeOriginal;
