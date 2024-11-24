@@ -1,13 +1,24 @@
 <!--- data-lat and data-long are used to plot markers on leaflet map --->
 <figure class="marker" :data-lat="photo.lat" :data-lon="photo.lon">
   <h2 class="h4" :id="uid">
-    <a
-      @if="photo.iNatTaxa"
-      :href="`https://www.inaturalist.org/taxa/${photo.iNatTaxa}`"
-    >
+    <div webc:if="photo.iNatTaxa" webc:nokeep>
+      <a :href="`https://www.inaturalist.org/taxa/${photo.iNatTaxa}`">
+        <span @text="photo.title" webc:nokeep></span>
+        <span
+          webc:if="photo.caption"
+          @text="`(${photo.caption})`"
+          class="binomial-name"
+        ></span>
+      </a>
+    </div>
+    <div webc:else>
       <span @text="photo.title" webc:nokeep></span>
-      <span @text="`(${photo.caption})`" class="binomial-name"></span>
-    </a>
+      <span
+        webc:if="photo.caption"
+        @text="`(${photo.caption})`"
+        class="binomial-name"
+      ></span>
+    </div>
   </h2>
   <img :src="(`/assets/images/${photo.src}.jpeg`)" :alt="photo.caption" />
   <figcaption>
@@ -15,7 +26,7 @@
       <li>
         <time :@value="photo.dateTime" @format="h:mm a"></time>
       </li>
-      <li><span @text="photo.lens"></span></li>
+      <li webc:if="photo.lens"><span @text="photo.lens"></span></li>
     </ul>
   </figcaption>
 </figure>
@@ -45,7 +56,7 @@
     padding-inline-start: 0;
   }
 
-  :host ul > li {
+  :host ul > li + li {
     padding-inline-start: 1em;
   }
 
