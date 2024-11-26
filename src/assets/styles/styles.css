@@ -16,6 +16,7 @@ html {
   -moz-text-size-adjust: none;
   -webkit-text-size-adjust: none;
   text-size-adjust: none;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -116,8 +117,8 @@ p + p {
 }
 
 article {
-    background-color: #334e40;
-    background-image: linear-gradient(180deg, rgba(51,78,69,0.6) 0%, rgba(51,78,64,0.85) 35%, rgba(51,78,64,0.85) 100%), url(/assets/images/pioneer-valley-topo.svg);
+    background-color: hsl(150, 27%, 12%);
+    background-image: linear-gradient(180deg, hsla(160, 21%, 25%, 0.6) 0%, hsla(149, 21%, 25%, 0.85) 35%, hsla(149, 21%, 25%, 0.85) 100%), url(/assets/images/pioneer-valley-topo.svg);
     border-radius: 10px;
     color: hsl(100, 100%, 100%);
 }
