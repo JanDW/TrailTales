@@ -28,6 +28,9 @@
       </li>
       <li webc:if="photo.lens"><span @text="photo.lens"></span></li>
     </ul>
+    <template webc:type="11ty" 11ty:type="njk, md">
+      {{ photo.figcaption }}
+    </template>
   </figcaption>
 </figure>
 
