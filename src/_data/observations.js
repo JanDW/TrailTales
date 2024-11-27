@@ -8,7 +8,7 @@ const observationsUrl =
 async function getObservations() {
   try {
     const data = await Fetch(observationsUrl, {
-      duration: '0s',
+      duration: '*',
       type: 'json',
     });
 
@@ -21,7 +21,7 @@ async function getObservations() {
     if (pages > 1) {
       for (let i = 2; i <= pages; i++) {
         const pageData = await Fetch(`${observationsUrl}&page=${i}`, {
-          duration: '0s',
+          duration: '*',
           type: 'json',
         });
         data.results = data.results.concat(pageData.results);
