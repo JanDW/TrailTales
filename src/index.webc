@@ -1,4 +1,7 @@
 ---
 ---
 
-<a href="/walks/">walks</a>
+<ul>
+  <li><a href="/walks/">walks</a></li>
+  <li><a href="/observations/">observations</a></li>
+</ul>

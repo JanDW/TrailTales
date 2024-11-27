@@ -1,0 +1,107 @@
+---
+layout: layout
+permalink: /observations/index.html
+---
+
+<p>
+  observations to date:
+  <span webc:if="observations.length === 0">No observations yet.</span>
+  <span webc:else @text="observations.length"></span>
+</p>
+
+<ul>
+  <div webc:nokeep webc:for="observation of observations">
+    <li class="observation" webc:if="observation.taxon">
+      <h2 @text="observation.taxon.preferred_common_name"></h2>
+      <p @text="observation.taxon.name"></p>
+      <p @text="observation.description"></p>
+      <p @text="observation.place_guess"></p>
+
+      <a :href="observation.uri">Observation on iNaturalist</a>
+      <a :href="observation.taxon.wikipedia_url">Wiki</a>
+      <time :@value="observation.time_observed_at" @format=" LLL d, yyyy"></time>
+      <span @text="` at `" webc:nokeep></span>
+      <time :@value="observation.time_observed_at" @format="h:mm a"></time>
+
+      <span data-lat @text="observation.geojson.coordinates[0]"></span>
+      <span data-lon @text="observation.geojson.coordinates[1]"></span>
+
+      <!-- <div webc:nokeep webc:for="photo of observation.photos">
+        <img :src="`https://inaturalist-open-data.s3.amazonaws.com/photos/${photo.id}/medium.jpeg`" :alt="" />
+      </div> -->
+
+      <script webc:type="js">
+        async function checkImageExists(url) {
+          try {
+            // Use HEAD request to check if image exists, this prevents downloading the image
+            const response = await fetch(url, { method: 'HEAD' });
+            return response.ok;
+          } catch (error) {
+            return false;
+          }
+        }
+
+        async function getImageUrl(photoId) {
+          const jpegUrl = `https://inaturalist-open-data.s3.amazonaws.com/photos/${photoId}/medium.jpeg`;
+          const jpgUrl = `https://inaturalist-open-data.s3.amazonaws.com/photos/${photoId}/medium.jpg`;
+
+          if (await checkImageExists(jpegUrl)) {
+            return jpegUrl;
+          } else if (await checkImageExists(jpgUrl)) {
+            return jpgUrl;
+          } else {
+            return 'borked image url!'; // @TODO return a placeholder image
+          }
+        }
+
+        async function getPhotoHtml(photoId) {
+          const photoUrl = await getImageUrl(photoId);
+          return `<img src="${photoUrl}" alt="" />`;
+        }
+
+        async function getPhotosHtml(photos) {
+          let outputHtml = '';
+
+          const promises = photos.map(async (photo) => {
+            const photoHtml = await getPhotoHtml(photo.id);
+            outputHtml += photoHtml;
+          });
+
+          await Promise.all(promises);
+          return outputHtml;
+        }
+
+        // Immediately invoke an async function to use await
+        (async () => {
+          return `${await getPhotosHtml(observation.photos)}`;
+        })();
+      </script>
+
+      <!-- Taxa -->
+      <table
+        webc:if="observation.identifications && observation.identifications.taxon"
+      >
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            webc:for="ancestor of observation.identifications[0].taxon.ancestors"
+          >
+            <td>
+              <img
+                :src="ancestor.default_photo.square_url"
+                alt="`${ancestor.rank}: ${ancestor.name}`"
+              />
+            </td>
+            <td @text="ancestor.rank"></td>
+            <td @text="ancestor.name"></td>
+          </tr>
+        </tbody>
+      </table>
+    </li>
+  </div>
+</ul>
