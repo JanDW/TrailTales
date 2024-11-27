@@ -1,0 +1,10 @@
+
+# Get taxon by ID
+@taxonId = 194231
+https://api.inaturalist.org/v1/taxa/{{taxonId}}
+
+###
+
+# Get observations by user login
+@userLogin = jan_de_wilde 
+curl -X GET --header 'Accept: application/json' 'https://api.inaturalist.org/v1/observations?user_login={{userLogin}}&order=desc&order_by=created_at'
