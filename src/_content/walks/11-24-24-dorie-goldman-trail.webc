@@ -1,0 +1,18 @@
+---
+title: 'Dorie Goldman Trail with Sofie'
+gpxFile: '11-24-24-dorie-goldman-trail'
+photos:
+  - src: '11-24-24-dory-goldman-trail - 1'
+  - src: '11-24-24-dory-goldman-trail - 2'
+  - src: '11-24-24-dory-goldman-trail - 3'
+  - src: '11-24-24-dory-goldman-trail - 4'
+  - src: '11-24-24-dory-goldman-trail - 5'
+  - src: '11-24-24-dory-goldman-trail - 6'
+  - src: '11-24-24-dory-goldman-trail - 7'
+  - src: '11-24-24-dory-goldman-trail - 8'
+  - src: '11-24-24-dory-goldman-trail - 9'
+  - src: '11-24-24-dory-goldman-trail - 10'
+---
+<template webc:type="11ty" 11ty:type="njk, md">
+  Windy day.
+</template>

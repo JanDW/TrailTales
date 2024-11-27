@@ -2,12 +2,6 @@
 layout: layout
 ---
 
-<!--- 
-<script webc:setup>
-  // console.log({ gpxData });
-</script>
---->
-
 <leaflet-includes webc:nokeep></leaflet-includes>
 <article>
 
@@ -33,7 +27,6 @@ layout: layout
     ></gpx-map>
   </div>
   <div slot="left" style="overflow-y: scroll; padding: var(--space-s);">
-    <!-- <span @raw="console.log($data.gpx)"></span> -->
     <div webc:for="photo of photos" webc:nokeep>
       <photo :@photo="photo"></photo>
     </div>

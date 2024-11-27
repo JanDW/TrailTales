@@ -31,7 +31,7 @@ eleventyExcludeFromCollections: true
     ></span>
   </p>
   <gpx-map
-    :file="walk.data.gpxData?.fileName"
+    :file="walk.data.gpxData?.fileName.replace('.gpx', '')"
     :startLat="walk.data.gpxData?.startWaypoint.lat"
     :startLong="walk.data.gpxData?.startWaypoint.lon"
   >
