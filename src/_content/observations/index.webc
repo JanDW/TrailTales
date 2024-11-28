@@ -5,12 +5,12 @@ permalink: /observations/index.html
 
 <p>
   observations to date:
-  <span webc:if="observations.length === 0">No observations yet.</span>
-  <span webc:else @text="observations.length"></span>
+  <span webc:if="observations.all.length === 0">No observations yet.</span>
+  <span webc:else @text="observations.all.length"></span>
 </p>
 
 <ul>
-  <div webc:nokeep webc:for="observation of observations">
+  <div webc:nokeep webc:for="observation of observations.all">
     <li class="observation" webc:if="observation.taxon">
       <h2 @text="observation.taxon.preferred_common_name"></h2>
       <p @text="observation.taxon.name"></p>
@@ -79,7 +79,7 @@ permalink: /observations/index.html
               /> 
             </td>
             <td @text="ancestor.rank"></td>
-            <td @text="ancestor.name"></td>
+            <td><a :href="`https://www.inaturalist.org/taxa/${ancestor.id}`"><span @text="ancestor.name" webc:nokeep></span></a></td>
           </tr>
         </tbody>
       </table>

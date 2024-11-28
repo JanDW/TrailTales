@@ -28,11 +28,6 @@ async function getObservations() {
       }
     }
 
-    // //sort data reverse chronological order by date recorded
-    // data.results.sort((a, b) => {
-    //   return new Date(b.created_at) - new Date(a.created_at);
-    // });
-
     return data.results;
   } catch (error) {
     console.error('Error reading observations:', error);
@@ -40,6 +35,27 @@ async function getObservations() {
   }
 }
 
+async function extractProperties(observations) {
+  return observations.map((observation) => {
+    // console.log(observation);
+    // use same key names as in the iNaturalist API
+    return {
+      preferred_common_name: observation.taxon?.preferred_common_name ?? null,
+      name: observation.taxon?.name ?? null,
+      id: observation.taxon?.id ?? null,
+      description: observation.description ?? null,
+      place_guess: observation.place_guess ?? null,
+      uri: observation.uri ?? null,
+      wikipedia_url: observation.taxon?.wikipedia_url ?? null,
+      time_observed_at: observation.time_observed_at ?? null,
+      coordinates: observation.geojson?.coordinates ?? [null, null],
+      ancestors: observation.identifications?.[0]?.taxon?.ancestors ?? [],
+    };
+  });
+}
+
 export default async function () {
-  return await getObservations();
+  const all = await getObservations();
+  const selected = await extractProperties(all);
+  return { all, selected };
 }
