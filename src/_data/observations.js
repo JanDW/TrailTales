@@ -3,7 +3,7 @@ import { EventEmitter } from 'events';
 EventEmitter.defaultMaxListeners = 200;
 
 const observationsUrl =
-  'https://api.inaturalist.org/v1/observations?user_id=jan_de_wilde&user_login=jan_de_wilde&order=desc&order_by=created_at';
+  'https://api.inaturalist.org/v1/observations?user_login=jan_de_wilde&order=desc&order_by=created_at';
 
 async function getObservations() {
   try {
@@ -71,7 +71,7 @@ async function getImageUrl(photoId, size = 'medium') {
   } else if (await checkImageExists(jpgUrl)) {
     return jpgUrl;
   } else {
-    return 'borked image url!'; // @TODO return a placeholder image
+    return '😵 borked image url!'; // @TODO return a placeholder image
   }
 }
 
@@ -112,6 +112,5 @@ async function extractProperties(observations) {
 export default async function () {
   const all = await getObservations();
   const selected = await extractProperties(all);
-  // console.log(selected[0].image_urls);
   return { all, selected };
 }

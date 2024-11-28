@@ -3,27 +3,52 @@ layout: layout
 permalink: /observations/index.html
 ---
 
-<p>
+<div>
   observations to date:
   <span webc:if="observations.selected.length === 0">No observations yet.</span>
-  <span webc:else @text="observations.selected.length"></span>
-</p>
+  <div>
+    <p>observations.selected</p>
+    <span @text="observations.selected.length"></span>
+  </div>
+  <div>
+    <p>observations.all</p>
+    <span @text="observations.all.length"></span>
+  </div>
+</div>
 
 <div webc:for="observation of observations.selected">
   <hr />
   <h2 @text="observation.preferred_common_name"></h2>
-  <p @text="observation.name"></p>
-  <a :href="`https://www.inaturalist.org/taxa/${observation.id}`"
-    >Taxon on iNaturalist</a
-  >
-  <p @text="observation.description"></p>
-  <p @text="observation.place_guess"></p>
-  <p><a :href="observation.uri">Observation on iNaturalist</a></p>
-  <time :@value="observation.time_observed_at" @format=" LLL d, yyyy"></time>
-  <span @text="` at `" webc:nokeep></span>
-  <time :@value="observation.time_observed_at" @format="h:mm a"></time>
-  <p @raw="observation.wikipedia_summary"></p>
-  <a :href="observation.wikipedia_url">Continue reading on Wikipedia</a>
+  <div><i @text="`(${observation.name})`"></i></div>
+  <div webc:if="observation.quality_grade == 'research'">
+    <span>Research Grade</span>
+  </div>
+  <ul>
+    <li webc:for="image of observation.images">
+      <img :src="image.url" :alt="image.alt" loading="lazy" />
+    </li>
+  </ul>
+  <div>
+    <a :href="`https://www.inaturalist.org/taxa/${observation.id}`"
+      >Taxon on iNaturalist</a
+    >
+  </div>
+
+  <div webc:if="observation.description" @text="observation.description"></div>
+  <div @text="observation.place_guess"></div>
+  <div><a :href="observation.uri">Observation on iNaturalist</a></div>
+  <div>
+    <time :@value="observation.time_observed_at" @format=" LLL d, yyyy"></time>
+    <span @text="` at `" webc:nokeep></span>
+    <time :@value="observation.time_observed_at" @format="h:mm a"></time>
+  </div>
+  <div>
+    <p @raw="observation.wikipedia_summary" webc:nokeep></p>
+    <p>
+      <a :href="observation.wikipedia_url">Continue reading on Wikipedia</a>
+    </p>
+  </div>
+
   <div class="geo">
     <span
       class="latitude"
@@ -33,7 +58,10 @@ permalink: /observations/index.html
       class="longitude"
       @text="`Longitude: ${observation.coordinates[0]}`"
     ></span>
-    <a :href="`https://maps.apple.com/?q=${observation.coordinates[1]},${observation.coordinates[0]}`">Apple Maps</a>
+    <a
+      :href="`https://maps.apple.com/?q=${observation.coordinates[1]},${observation.coordinates[0]}`"
+      >Apple Maps</a
+    >
   </div>
   <table>
     <thead>
@@ -61,9 +89,4 @@ permalink: /observations/index.html
       </tr>
     </tbody>
   </table>
-  <ul>
-    <li webc:for="url of observation.image_urls">
-      <img :src="url" alt="" />
-    </li>
-  </ul>
 </div>
