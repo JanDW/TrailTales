@@ -33,6 +33,7 @@ permalink: /observations/index.html
       class="longitude"
       @text="`Longitude: ${observation.coordinates[0]}`"
     ></span>
+    <a :href="`https://maps.apple.com/?q=${observation.coordinates[1]},${observation.coordinates[0]}`">Apple Maps</a>
   </div>
   <table>
     <thead>
