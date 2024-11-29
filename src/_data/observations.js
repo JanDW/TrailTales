@@ -8,14 +8,14 @@ const observationsUrl =
 async function getObservations() {
   try {
     const data = await EleventyFetch(observationsUrl, {
-      duration: '*',
+      duration: '0s',
       type: 'json',
     });
 
     // Check the 'total_results' value and compare to 'per_page' to see if there are more pages of data
 
     const pages = Math.ceil(data.total_results / data.per_page);
-
+    console.log({ total: data.total_results, per_page: data.per_page, pages });
     // If there are more pages, fetch them and add the results to the data object
 
     if (pages > 1) {
@@ -24,7 +24,12 @@ async function getObservations() {
           duration: '*',
           type: 'json',
         });
+        console.log({
+          existingCount: data.results.length,
+          newCount: pageData.results.length,
+        });
         data.results = data.results.concat(pageData.results);
+        console.log({ updatedCount: data.results.length });
       }
     }
 
@@ -68,11 +73,12 @@ async function getImageUrl(photoId, size = 'medium') {
 
   if (await checkImageExists(jpegUrl)) {
     return jpegUrl;
-  } else if (await checkImageExists(jpgUrl)) {
-    return jpgUrl;
-  } else {
-    return '😵 borked image url!'; // @TODO return a placeholder image
   }
+
+  if (await checkImageExists(jpgUrl)) {
+    return jpgUrl;
+  }
+  return '😵 borked image url!'; // @TODO return a placeholder image
 }
 
 async function extractProperties(observations) {
@@ -84,9 +90,12 @@ async function extractProperties(observations) {
         observation.taxon?.id
       );
 
-      const image_urls = await Promise.all(
+      const images = await Promise.all(
         observation.photos.map(async (photo) => {
-          return await getImageUrl(photo.id);
+          const url = await getImageUrl(photo.id);
+          const alt =
+            observation.taxon?.preferred_common_name ?? observation.taxon?.name;
+          return { url, alt };
         })
       );
 
@@ -102,15 +111,15 @@ async function extractProperties(observations) {
         coordinates: observation.geojson?.coordinates ?? [null, null],
         ancestors: observation.identifications?.[0]?.taxon?.ancestors ?? [],
         wikipedia_summary: wikipedia_summary,
-        image_urls: image_urls,
+        images,
       };
     })
   );
   return results;
 }
 
-export default async function () {
-  const all = await getObservations();
-  const selected = await extractProperties(all);
-  return { all, selected };
-}
+
+const all = await getObservations();
+const selected = await extractProperties(all);
+
+export default { all, selected };

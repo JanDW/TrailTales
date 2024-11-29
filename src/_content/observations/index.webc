@@ -18,7 +18,8 @@ permalink: /observations/index.html
 
 <div webc:for="observation of observations.selected">
   <hr />
-  <h2 @text="observation.preferred_common_name"></h2>
+  <h2 webc:if="observation.preferred_common_name" @text="observation.preferred_common_name"></h2>
+  <h2 webc:else @text="observation.name"></h2>
   <div><i @text="`(${observation.name})`"></i></div>
   <div webc:if="observation.quality_grade == 'research'">
     <span>Research Grade</span>
