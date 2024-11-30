@@ -17,7 +17,7 @@ async function getObservations() {
     // Check the 'total_results' value and compare to 'per_page' to see if there are more pages of data
 
     const pages = Math.ceil(data.total_results / data.per_page);
-    
+
     // If there are more pages, fetch them and add the results to the data object
 
     if (pages > 1) {
@@ -83,7 +83,6 @@ async function getImageUrl(photoId, size = 'medium') {
 async function extractProperties(observations) {
   const results = await Promise.all(
     observations.map(async (observation) => {
-      
       // use same key names as in the iNaturalist API
       const wikipedia_summary = await getWikipediaSummary(
         observation.taxon?.id
@@ -121,5 +120,38 @@ async function extractProperties(observations) {
 
 const all = await getObservations();
 const selected = await extractProperties(all);
+const species = Object.values(
+  selected.reduce((acc, observation) => {
+    const {
+      taxon_id,
+      preferred_common_name,
+      name,
+      id,
+      ancestors,
+      wikipedia_url,
+      wikipedia_summary,
+      taxon_photo,
+      place_guess,
+      photos,
+    } = observation;
+    if (!acc[taxon_id]) {
+      acc[taxon_id] = {
+        taxon_id,
+        preferred_common_name,
+        name,
+        place_guess,
+        observation_ids: [],
+        ancestors,
+        wikipedia_url,
+        wikipedia_summary,
+        taxon_photo,
+        photos: [],
+      };
+    }
+    acc[taxon_id].observation_ids.push(id);
+    acc[taxon_id].photos = acc[taxon_id].photos.concat(photos);
+    return acc;
+  }, {})
+);
 
-export default { all, selected };
+export default { all, selected, species };
