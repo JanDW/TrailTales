@@ -6,15 +6,9 @@
     alias: 'species',
   };
   
-  let permalink = function(observation) {
-    return `/species/${observation.species.id}/`;
+  let permalink = function(data) {
+    return `/species/${data.species.id}/`;
   };
-
-  // let eleventyComputed = {
-  //   permalink: function(data) {
-  //     return `/species/${this.slugify(data.species.name)}/`;
-  //   },
-  // };
 ---
 
 <h2

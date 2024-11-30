@@ -3,78 +3,13 @@ layout: layout
 permalink: /observations/index.html
 ---
 
-<div webc:for="observation of observations.selected">
-  <hr />
-  <h2 webc:if="observation.preferred_common_name" @text="observation.preferred_common_name"></h2>
-  <h2 webc:else @text="observation.name"></h2>
-  <div><i @text="`(${observation.name})`"></i></div>
-  <div webc:if="observation.quality_grade == 'research'">
-    <span>Research Grade</span>
-  </div>
-  <ul>
-    <li webc:for="photo of observation.photos">
-      <img :src="photo.url" :alt="photo.alt" loading="lazy" />
-    </li>
-  </ul>
-  <div>
-    <a :href="`https://www.inaturalist.org/taxa/${observation.id}`"
-      >Taxon on iNaturalist</a
-    >
-  </div>
 
-  <div webc:if="observation.description" @text="observation.description"></div>
-  <div @text="observation.place_guess"></div>
-  <div><a :href="observation.uri">Observation on iNaturalist</a></div>
-  <div>
-    <time :@value="observation.time_observed_at" @format=" LLL d, yyyy"></time>
-    <span @text="` at `" webc:nokeep></span>
-    <time :@value="observation.time_observed_at" @format="h:mm a"></time>
-  </div>
-  <div>
-    <p @raw="observation.wikipedia_summary" webc:nokeep></p>
-    <p>
-      <a :href="observation.wikipedia_url">Continue reading on Wikipedia</a>
-    </p>
-  </div>
-
-  <div class="geo">
-    <span
-      class="latitude"
-      @text="`Latitude: ${observation.coordinates[1]}`"
-    ></span
-    ><span
-      class="longitude"
-      @text="`Longitude: ${observation.coordinates[0]}`"
-    ></span>
-    <a
-      :href="`https://maps.apple.com/?q=${observation.coordinates[1]},${observation.coordinates[0]}`"
-      >Apple Maps</a
-    >
-  </div>
-  <table>
-    <thead>
-      <tr>
-        <th>Image</th>
-        <th>Rank</th>
-        <th>Name</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr webc:for="ancestor of observation.ancestors">
-        <td>
-          <img
-            webc:if="ancestor.default_photo"
-            :src="ancestor.default_photo.square_url"
-            alt="`${ancestor.rank}: ${ancestor.name}`"
-          />
-        </td>
-        <td @text="ancestor.rank"></td>
-        <td>
-          <a :href="`https://www.inaturalist.org/taxa/${ancestor.id}`"
-            ><span @text="ancestor.name" webc:nokeep></span
-          ></a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<ul webc:for="o of observations.selected">
+  <li>
+    <!-- // @DOING add permalinks to species in observations.js, perhaps use taxon -->
+    <a :href="o.local_uri">
+      <span @text="o.preferred_common_name"></span>
+      <i @text="o.name"></i>
+    </a>
+  </li>
+</ul>

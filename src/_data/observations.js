@@ -46,7 +46,7 @@ async function getWikipediaSummary(taxonId) {
   try {
     const url = `https://api.inaturalist.org/v1/taxa/${taxonId}`;
     const taxonData = await EleventyFetch(url, {
-      duration: '300s',
+      duration: '*',
       type: 'json',
     });
     return taxonData?.results[0]?.wikipedia_summary ?? null;
@@ -111,6 +111,7 @@ async function extractProperties(observations) {
         ancestors: observation.identifications?.[0]?.taxon?.ancestors ?? [],
         wikipedia_summary: wikipedia_summary,
         taxon_photo: observation.taxon?.default_photo?.medium_url ?? null,
+        local_uri: `/observations/${observation.id}/index.html`,
         photos,
       };
     })
@@ -146,7 +147,7 @@ const species = Object.values(
         wikipedia_summary,
         taxon_photo,
         photos: [],
-        uri: `/species/${taxon_id}/index.html`,
+        local_uri: `/species/${taxon_id}/index.html`,
       };
     }
     acc[taxon_id].observation_ids.push(id);
