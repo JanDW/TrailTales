@@ -1,0 +1,16 @@
+---js
+let layout = "layout";
+let permalink = "/species/index.html";
+---
+
+<ul webc:for="s of observations.species">
+  <li>
+    <!-- // @DOING add permalinks to species in observations.js, perhaps use taxon -->
+    <a :href="s.uri">
+      <span @text="s.preferred_common_name"></span>
+      <i @text="s.name"></i>
+    </a>
+  </li>
+</ul>
+
+

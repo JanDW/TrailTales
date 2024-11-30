@@ -146,6 +146,7 @@ const species = Object.values(
         wikipedia_summary,
         taxon_photo,
         photos: [],
+        uri: `/species/${taxon_id}/index.html`,
       };
     }
     acc[taxon_id].observation_ids.push(id);

@@ -1,18 +1,27 @@
 ---js
-{
-  layout: 'layout',
-  pagination: {
+  let layout = 'layout';
+  let pagination = {
     data: 'observations.species',
     size: 1,
     alias: 'species',
-  },
-  eleventyComputed: {
-    permalink: (data) => `/species/${data.species.id}/`,
-  },
-}
+  };
+  
+  let permalink = function(observation) {
+    return `/species/${observation.species.id}/`;
+  };
+
+  // let eleventyComputed = {
+  //   permalink: function(data) {
+  //     return `/species/${this.slugify(data.species.name)}/`;
+  //   },
+  // };
 ---
 
-<h2 webc:if="species.preferred_common_name" @text="species.preferred_common_name"></h2>
+<h2
+  webc:if="species.preferred_common_name"
+  @text="species.preferred_common_name"
+></h2>
+
 <h2 webc:else @text="species.name"></h2>
 
 <span @text="species.id"></span>
