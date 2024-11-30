@@ -136,7 +136,7 @@ const species = Object.values(
     } = observation;
     if (!acc[taxon_id]) {
       acc[taxon_id] = {
-        taxon_id,
+        id: taxon_id,
         preferred_common_name,
         name,
         place_guess,

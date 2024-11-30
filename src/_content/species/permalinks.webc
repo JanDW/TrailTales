@@ -1,0 +1,19 @@
+---js
+{
+  layout: 'layout',
+  pagination: {
+    data: 'observations.species',
+    size: 1,
+    alias: 'species',
+  },
+  eleventyComputed: {
+    permalink: (data) => `/species/${data.species.id}/`,
+  },
+}
+---
+
+<h2 webc:if="species.preferred_common_name" @text="species.preferred_common_name"></h2>
+<h2 webc:else @text="species.name"></h2>
+
+<span @text="species.id"></span>
+<span @text="species.place_guess"></span>
