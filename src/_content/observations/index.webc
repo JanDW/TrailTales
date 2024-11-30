@@ -3,19 +3,6 @@ layout: layout
 permalink: /observations/index.html
 ---
 
-<div>
-  observations to date:
-  <span webc:if="observations.selected.length === 0">No observations yet.</span>
-  <div>
-    <p>observations.selected</p>
-    <span @text="observations.selected.length"></span>
-  </div>
-  <div>
-    <p>observations.all</p>
-    <span @text="observations.all.length"></span>
-  </div>
-</div>
-
 <div webc:for="observation of observations.selected">
   <hr />
   <h2 webc:if="observation.preferred_common_name" @text="observation.preferred_common_name"></h2>
@@ -25,8 +12,8 @@ permalink: /observations/index.html
     <span>Research Grade</span>
   </div>
   <ul>
-    <li webc:for="image of observation.images">
-      <img :src="image.url" :alt="image.alt" loading="lazy" />
+    <li webc:for="photo of observation.photos">
+      <img :src="photo.url" :alt="photo.alt" loading="lazy" />
     </li>
   </ul>
   <div>

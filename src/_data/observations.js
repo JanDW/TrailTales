@@ -7,29 +7,28 @@ const observationsUrl =
 
 async function getObservations() {
   try {
-    const data = await EleventyFetch(observationsUrl, {
-      duration: '0s',
-      type: 'json',
-    });
+    const data = structuredClone(
+      await EleventyFetch(observationsUrl, {
+        duration: '*',
+        type: 'json',
+      })
+    );
 
     // Check the 'total_results' value and compare to 'per_page' to see if there are more pages of data
 
     const pages = Math.ceil(data.total_results / data.per_page);
-    console.log({ total: data.total_results, per_page: data.per_page, pages });
+    
     // If there are more pages, fetch them and add the results to the data object
 
     if (pages > 1) {
       for (let i = 2; i <= pages; i++) {
-        const pageData = await EleventyFetch(`${observationsUrl}&page=${i}`, {
-          duration: '*',
-          type: 'json',
-        });
-        console.log({
-          existingCount: data.results.length,
-          newCount: pageData.results.length,
-        });
+        const pageData = structuredClone(
+          await EleventyFetch(`${observationsUrl}&page=${i}`, {
+            duration: '*',
+            type: 'json',
+          })
+        );
         data.results = data.results.concat(pageData.results);
-        console.log({ updatedCount: data.results.length });
       }
     }
 
@@ -84,13 +83,13 @@ async function getImageUrl(photoId, size = 'medium') {
 async function extractProperties(observations) {
   const results = await Promise.all(
     observations.map(async (observation) => {
-      // console.log(observation);
+      
       // use same key names as in the iNaturalist API
       const wikipedia_summary = await getWikipediaSummary(
         observation.taxon?.id
       );
 
-      const images = await Promise.all(
+      const photos = await Promise.all(
         observation.photos.map(async (photo) => {
           const url = await getImageUrl(photo.id);
           const alt =
@@ -102,7 +101,8 @@ async function extractProperties(observations) {
       return {
         preferred_common_name: observation.taxon?.preferred_common_name ?? null,
         name: observation.taxon?.name ?? null,
-        id: observation.taxon?.id ?? null,
+        id: observation.id,
+        taxon_id: observation.taxon?.id ?? null,
         description: observation.description ?? null,
         place_guess: observation.place_guess ?? null,
         uri: observation.uri ?? null,
@@ -111,13 +111,13 @@ async function extractProperties(observations) {
         coordinates: observation.geojson?.coordinates ?? [null, null],
         ancestors: observation.identifications?.[0]?.taxon?.ancestors ?? [],
         wikipedia_summary: wikipedia_summary,
-        images,
+        taxon_photo: observation.taxon?.default_photo?.medium_url ?? null,
+        photos,
       };
     })
   );
   return results;
 }
-
 
 const all = await getObservations();
 const selected = await extractProperties(all);
